@@ -1,0 +1,15 @@
+.parent{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+
+.sidebar{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+
+.submitButton{
+    -fx-background-color: #8FD8B5;
+    -fx-background-radius: 5px 5px 5px 5px;
+    -fx-effect: null; /*remove drop shadow*/
+}
