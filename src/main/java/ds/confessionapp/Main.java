@@ -23,7 +23,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
 
         primaryStage.setTitle("Confession App");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 765, 480)); //width height
         primaryStage.show();
 
 //        primaryStage.setOnCloseRequest(event -> {
