@@ -1,4 +1,4 @@
-package ds.confessionapp;
+package ds.confessionapp.adminPanel;
 
 import java.sql.*;
 

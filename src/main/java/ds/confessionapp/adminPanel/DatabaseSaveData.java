@@ -1,4 +1,4 @@
-package ds.confessionapp;
+package ds.confessionapp.adminPanel;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,7 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class DatabaseSave {
+/* WHAT TO FIX
+*  files that already in DB no need to save again in the database
+* */
+class DatabaseSaveData {
 
     public static void main(String[] args) throws SQLException {
 
