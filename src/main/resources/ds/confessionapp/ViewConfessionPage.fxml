@@ -41,7 +41,7 @@
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Label layoutX="53.0" layoutY="23.0" text="Let's hear what everyone is talking about!">
+            <Label layoutX="53.0" layoutY="23.0" text="Let's see what everyone is talking about!">
                <font>
                   <Font name="PP Pangram Sans Semibold" size="20.0" />
                </font>
@@ -58,6 +58,25 @@
                   <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Search Confession" style="-fx-background-color: transparent;" />
                </children>
             </HBox>
+            <AnchorPane layoutX="475.0" layoutY="359.0" prefHeight="70.0" prefWidth="200.0" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css">
+               <children>
+                  <Label id="confession_id" layoutX="29.0" layoutY="14.0" text="#Confession_id" textFill="#606ed7">
+                     <font>
+                        <Font name="PP Pangram Sans Semibold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label id="creation_date" layoutX="33.0" layoutY="35.0" text="Creation_Date" textFill="WHITE">
+                     <font>
+                        <Font name="PP Pangram Sans Semibold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="51.0" layoutY="70.0" prefHeight="360.0" prefWidth="410.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
+               <children>
+                  <Label layoutX="50.0" layoutY="163.0" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </center>
