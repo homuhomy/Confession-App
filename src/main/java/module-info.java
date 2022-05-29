@@ -8,4 +8,6 @@ module ds.confessionapp {
     exports ds.confessionapp;
     exports ds.confessionapp.adminPanel;
     opens ds.confessionapp.adminPanel to javafx.fxml;
+    exports ds.confessionapp.GUI;
+    opens ds.confessionapp.GUI to javafx.fxml;
 }

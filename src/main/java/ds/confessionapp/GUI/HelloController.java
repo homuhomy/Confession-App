@@ -1,4 +1,4 @@
-package ds.confessionapp;
+package ds.confessionapp.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

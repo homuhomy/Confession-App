@@ -1,4 +1,4 @@
-package ds.confessionapp;
+package ds.confessionapp.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
