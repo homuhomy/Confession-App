@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.GUI.StartUpScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.GUI.ConfessionPageController">
    <left>
       <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
@@ -31,12 +36,28 @@
    <center>
       <AnchorPane prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="543.0" layoutY="20.0" prefHeight="26.0" prefWidth="130.0" promptText="Search confession" />
-            <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="681.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="675.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
+            <Label layoutX="53.0" layoutY="23.0" text="Confessions">
+               <font>
+                  <Font name="PP Pangram Sans Semibold" size="17.0" />
+               </font>
+            </Label>
+            <HBox layoutX="501.0" layoutY="18.0" prefHeight="27.0" prefWidth="166.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7631579041481018" green="0.7631579041481018" blue="0.7631579041481018" opacity="0.28999999165534973" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <children>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Search Confession" style="-fx-background-color: transparent;" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </center>
@@ -46,7 +67,7 @@
    <right>
       <AnchorPane prefHeight="280.0" prefWidth="37.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView id="AdminSetting" fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="5.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="AdminSetting" fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="5.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
