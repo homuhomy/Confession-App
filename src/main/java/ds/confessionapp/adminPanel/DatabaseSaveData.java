@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /* WHAT TO FIX
-*  files that already in DB no need to save again in the database
+*  make it so that files that already in DB no need to save again in the database
 * */
 class DatabaseSaveData {
 

@@ -9,7 +9,13 @@
 }
 
 .submitButton{
-    -fx-background-color: #8FD8B5;
-    -fx-background-radius: 5px 5px 5px 5px;
+    -fx-background-color: #FF6D3B;
+    -fx-background-radius: 20px;
     -fx-effect: null; /*remove drop shadow*/
+}
+
+
+.search_tf{
+    -fx-background-color: #FFFFFF ;
+    -fx-background-radius: 20px;
 }

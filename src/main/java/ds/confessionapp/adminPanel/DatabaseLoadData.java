@@ -6,14 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 
-public class DatabaseRetrieveData {
+public class DatabaseLoadData {
     public static void main(String[] args) throws SQLException {
 
         String SQL="SELECT *FROM storeConfession_table";
+        //connect to the existing database
         try(Connection connection = DatabaseCheck.getConnection();
             PreparedStatement ps = connection.prepareStatement(SQL); ResultSet
                     rs = ps.executeQuery()) {
-            System.out.println("Following flies are downloaded from database..");
+
+            System.out.println("Following files are downloaded from database :");
+
             while (rs.next()) {
                 String confessionId = rs.getString("confession_id");
                 String replyId = rs.getString("reply_id");
@@ -22,6 +25,7 @@ public class DatabaseRetrieveData {
                 System.out.println("Confession ID: "+ confessionId);
                 System.out.println("Reply ID: "+replyId);
                 System.out.println("Confession Creation Date: "+ creationDate);
+                //character long object use it for text
                 Clob clob = rs.getClob("file_content");
                 InputStream inputStream = clob.getAsciiStream();
 
