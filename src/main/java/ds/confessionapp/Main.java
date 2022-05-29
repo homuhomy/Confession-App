@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
@@ -25,6 +26,8 @@ public class Main extends Application {
         primaryStage.setTitle("Confession App");
         primaryStage.setScene(new Scene(root, 765, 480)); //width height
         primaryStage.show();
+//        Button button = new Button("test");
+//        pane.getChildrenUnmodifiable().add(button);
 
 //        primaryStage.setOnCloseRequest(event -> {
 //            try {
@@ -39,21 +42,22 @@ public class Main extends Application {
         Parent pane = FXMLLoader.load(getClass().getResource(fxml));
         stage.getScene().setRoot(pane);
         System.out.println("test");
+
     }
 
-//    public void userLogOut(Stage primaryStage) throws IOException{
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//        alert.setTitle("Close");
-//        alert.setHeaderText("You're about to close the windows");
-//        alert.setContentText("Do you want to save before exiting?");
-//
-//        if (alert.showAndWait().get() == ButtonType.OK){
-//            Main main = new Main();
-//            main.changeScene("LoginForm.fxml");
-//            System.out.println("Successfully logged out");
-//        }
-//
-//    }
+    public void userLogOut(Stage primaryStage) throws IOException{
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Close");
+        alert.setHeaderText("You're about to close the windows");
+        alert.setContentText("Do you want to save before exiting?");
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+            Main main = new Main();
+            main.changeScene("LoginForm.fxml");
+            System.out.println("Successfully logged out");
+        }
+
+    }
 
     public static void main(String[] args) {
         launch();
