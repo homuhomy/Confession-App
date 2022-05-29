@@ -31,7 +31,7 @@ public class StartUpScreenController implements Initializable {
         }
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("viewConfession.fxml"));
+            root = FXMLLoader.load(getClass().getResource("ViewConfessionPage.fxml"));
         }
 
         Scene scene = new Scene(root);
