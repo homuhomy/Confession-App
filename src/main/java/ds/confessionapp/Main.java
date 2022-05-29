@@ -21,7 +21,8 @@ public class Main extends Application {
         stage = primaryStage;
         primaryStage.setResizable(false);
 
-        Parent root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StartUpScreen.fxml"));
+        Parent root = loader.load();
 
         primaryStage.setTitle("Confession App");
         primaryStage.setScene(new Scene(root, 765, 480)); //width height
