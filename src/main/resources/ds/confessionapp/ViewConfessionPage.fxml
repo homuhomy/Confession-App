@@ -36,17 +36,17 @@
    <center>
       <AnchorPane prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="675.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="683.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Label layoutX="53.0" layoutY="23.0" text="Confessions">
+            <Label layoutX="53.0" layoutY="23.0" text="Let's hear what everyone is talking about!">
                <font>
-                  <Font name="PP Pangram Sans Semibold" size="17.0" />
+                  <Font name="PP Pangram Sans Semibold" size="20.0" />
                </font>
             </Label>
-            <HBox layoutX="501.0" layoutY="18.0" prefHeight="27.0" prefWidth="166.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
+            <HBox layoutX="475.0" layoutY="20.0" prefHeight="27.0" prefWidth="166.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
                <effect>
                   <DropShadow>
                      <color>
@@ -62,17 +62,16 @@
       </AnchorPane>
    </center>
    <bottom>
-      <AnchorPane prefHeight="200.0" prefWidth="591.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <right>
-      <AnchorPane prefHeight="280.0" prefWidth="37.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="37.0" prefWidth="765.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView id="AdminSetting" fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="5.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="AdminSetting" fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="735.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
-         </children>
-      </AnchorPane>
+         </children></AnchorPane>
+   </bottom>
+   <right>
+      <AnchorPane prefHeight="280.0" prefWidth="37.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>
