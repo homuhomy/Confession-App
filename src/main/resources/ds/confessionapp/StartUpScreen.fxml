@@ -13,22 +13,17 @@
    <left>
       <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="homeIcon" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeIcon" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="AddNewConfessionIcon" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="AddNewConfessionIcon" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-plus-64.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="AdminSetting" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/icons8-system-administrator-male-48.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="homeIcon1" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeIcon1" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-home-48.png" />
                </image>
@@ -49,27 +44,28 @@
                   <Font name="PP Pangram Sans Light" size="14.0" />
                </font>
             </Text>
-            <TextField layoutX="462.0" layoutY="136.0" prefHeight="26.0" prefWidth="130.0" promptText="Search confession" />
-            <Button fx:id="submitButton" layoutX="152.0" layoutY="134.0" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="138.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="452.0" />
+            <TextField layoutX="449.0" layoutY="136.0" prefHeight="26.0" prefWidth="130.0" promptText="Search confession" />
+            <Button fx:id="submitButton" layoutX="160.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" textFill="WHITE" />
             <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="592.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Button fx:id="viewButton" layoutX="306.0" layoutY="133.0" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions">
-               <font>
-                  <Font name="System Italic" size="13.0" />
-               </font>
-            </Button>
+            <Button fx:id="viewButton" layoutX="306.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions" textFill="WHITE" />
+            <ImageView fitHeight="276.0" fitWidth="453.0" layoutX="150.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/students_main.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </center>
    <bottom>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="37.0" prefWidth="765.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="286.0" fitWidth="436.0" layoutX="181.0" layoutY="-87.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="735.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/students_main.png" />
+                  <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
          </children>

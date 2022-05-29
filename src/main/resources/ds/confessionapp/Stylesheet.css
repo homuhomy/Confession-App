@@ -14,8 +14,13 @@
     -fx-effect: null; /*remove drop shadow*/
 }
 
-
 .search_tf{
     -fx-background-color: #FFFFFF ;
     -fx-background-radius: 20px;
+}
+
+.textField{
+    -fx-background-color: transparent;
+    -fx-effect: null;
+
 }
