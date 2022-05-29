@@ -17,7 +17,7 @@ public class waitingList {
         String full ;
         int i=0;
         try {
-            File myObj = new File("Test.txt");
+            File myObj = new File("C:\\Users\\User\\IdeaProjects\\Confession-App\\InputFiles\\#UM011411.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
 
@@ -52,7 +52,7 @@ public class waitingList {
 
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
-        Runnable task1 = () -> System.out.println(confess.toString());
+        Runnable task1 = () -> System.out.println(confess);
 
         //if elements are 5 elements or less
         if(i<=5)

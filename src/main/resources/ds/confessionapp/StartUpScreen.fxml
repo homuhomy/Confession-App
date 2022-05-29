@@ -50,13 +50,13 @@
                </font>
             </Text>
             <TextField layoutX="462.0" layoutY="136.0" prefHeight="26.0" prefWidth="130.0" promptText="Search confession" />
-            <Button fx:id="btn" layoutX="152.0" layoutY="134.0" mnemonicParsing="false" onAction="#switc" onMouseClicked="#onClick" prefHeight="31.0" prefWidth="138.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="452.0" />
+            <Button fx:id="submitButton" layoutX="152.0" layoutY="134.0" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="138.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="452.0" />
             <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="592.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Button layoutX="306.0" layoutY="133.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions">
+            <Button fx:id="viewButton" layoutX="306.0" layoutY="133.0" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions">
                <font>
                   <Font name="System Italic" size="13.0" />
                </font>
