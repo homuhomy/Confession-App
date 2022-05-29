@@ -12,7 +12,7 @@ public class DatabaseCheck {
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "ds2022letsgo";
     private static final String DB_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/UMC";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/UMC_DS";
 
     private static Connection connection = null;
     static{
