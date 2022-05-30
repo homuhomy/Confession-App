@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/UMC_DS</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="UMConfession_database@34.124.213.155" uuid="3c0cd7a3-2a43-489e-b73f-b0150ed730cb">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://34.124.213.155:3306/UMConfession_database</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

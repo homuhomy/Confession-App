@@ -14,8 +14,22 @@
     -fx-effect: null; /*remove drop shadow*/
 }
 
-
 .search_tf{
     -fx-background-color: #FFFFFF ;
+    -fx-background-radius: 20px;
+}
+
+.textField{
+    -fx-background-color: transparent;
+    -fx-effect: null;
+}
+
+.confessionPost{
+    -fx-background-color: #FFFFFF ;
+    -fx-background-radius: 20px;
+}
+
+.confessionPostInfo{
+    -fx-background-color: #FABF48  ;
     -fx-background-radius: 20px;
 }
