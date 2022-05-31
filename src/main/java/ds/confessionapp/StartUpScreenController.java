@@ -84,8 +84,8 @@ public class StartUpScreenController implements Initializable {
         int found = 0; //false
 
         try{
-            Path dir = Paths.get("admin/AdminCredentials");
-            Scanner read = new Scanner(new FileInputStream(String.valueOf(dir)));
+            //Path dir = Paths.get("admin/AdminCredentials");
+            Scanner read = new Scanner(new FileInputStream("admin/AdminCredentials"));
             while(read.hasNextLine()){
                 if(username.equals(read.nextLine())){
                     if(pswd.equals(read.nextLine())){
