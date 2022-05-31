@@ -37,7 +37,6 @@
    <center>
       <AnchorPane prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="backForadmin" layoutX="599.0" layoutY="295.0" mnemonicParsing="false" onAction="#switchScenes" text="Back" />
             <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="683.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
@@ -79,6 +78,7 @@
                   <Label layoutX="50.0" layoutY="163.0" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" />
                </children>
             </AnchorPane>
+            <Button fx:id="backForadmin" layoutX="475.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>
