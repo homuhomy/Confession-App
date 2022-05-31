@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -82,7 +84,8 @@ public class StartUpScreenController implements Initializable {
         int found = 0; //false
 
         try{
-            Scanner read = new Scanner(new FileInputStream("AdminCredentials"));
+            Path dir = Paths.get("admin/AdminCredentials");
+            Scanner read = new Scanner(new FileInputStream(String.valueOf(dir)));
             while(read.hasNextLine()){
                 if(username.equals(read.nextLine())){
                     if(pswd.equals(read.nextLine())){

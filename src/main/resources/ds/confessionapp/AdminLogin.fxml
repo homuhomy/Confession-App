@@ -7,21 +7,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="372.0" prefWidth="574.0">
+      <AnchorPane layoutX="96.0" layoutY="54.0" prefHeight="372.0" prefWidth="574.0">
          <children>
-            <Text layoutX="99.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User: " />
-            <Text layoutX="73.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password: " />
-            <TextField fx:id="input" layoutX="129.0" layoutY="102.0" promptText="User/ID" />
-            <PasswordField fx:id="pswdinput" layoutX="129.0" layoutY="138.0" promptText="Password" />
-            <Text layoutX="225.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel">
+            <Text layoutX="143.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User: " />
+            <Text layoutX="143.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password: " />
+            <TextField fx:id="input" layoutX="231.0" layoutY="121.0" promptText="User/ID" />
+            <PasswordField fx:id="pswdinput" layoutX="231.0" layoutY="156.0" promptText="Password" />
+            <Text layoutX="251.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="325.0" layoutY="138.0" mnemonicParsing="false" onAction="#loginAction" text="Login" />
-            <Button fx:id="backForadmin" layoutX="494.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchScenes" text="Back" />
+            <Button layoutX="346.0" layoutY="194.0" mnemonicParsing="false" onAction="#loginAction" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Login" />
+            <Button fx:id="backForadmin" layoutX="494.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
          </children>
       </AnchorPane>
    </children>
