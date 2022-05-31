@@ -42,7 +42,7 @@ class DatabaseSaveData {
                 File file = path.toFile();
                 String confession_id = file.getName(); //use the file name as confession_id
 
-                //to find out if the text include "Replying to #UMXXXXXX"
+                //to find out if the text include "Replying to #UMXXXX"
                 String reply_id;
                 try {
                     BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -59,7 +59,7 @@ class DatabaseSaveData {
                 //get date of the file
                 BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
 
-                ps.setString(1, confession_id.substring(0,9));
+                ps.setString(1, confession_id.substring(0,7));
                 ps.setCharacterStream(2, new FileReader(file)); //get the file into column
                 ps.setString(3, reply_id);  //later change
 
