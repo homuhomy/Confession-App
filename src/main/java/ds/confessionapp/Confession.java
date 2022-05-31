@@ -1,6 +1,12 @@
 package ds.confessionapp;
 
+import ds.confessionapp.adminPanel.DatabaseCheck;
 import ds.confessionapp.adminPanel.DatabaseLoadData;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Confession {
     private String confession_id;
@@ -103,8 +109,9 @@ if (!reply_id.equals)
 
     // for searching purposes
 
-    /*
-// method to get confessions by keywords
+
+
+/*// method to get confessions by keywords
     public static Confession getConfessionByKeywords(String file_content) {
     String query = String.format("SELECT * FROM storeConfession_table " +
                         "WHERE file_content CONTAINS '%%%s%%'  ",
@@ -120,18 +127,29 @@ if (!reply_id.equals)
                 confession_id);
 // return
 
+    }*/
+
+//// method to get confessions by Creation Date
+//    public static Confession getConfessionByDate(String creation_date) {
+//    String query = String.format("SELECT * FROM storeConfession_table " +
+//                        "WHERE creation_date CONTAINS '%%%s%%'  ",
+//                creation_date);
+//// return
+//    }
+
+    // method to get confessions by Confession ID
+    Connection connection = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+
+    public ResultSet findByID(String s) throws SQLException {
+        connection = DatabaseCheck.getConnection();
+        ps = connection.prepareStatement("SELECT * FROM storeConfession_table " +
+                "WHERE confession_id = ?");
+        rs = ps.executeQuery();
+        return rs;
+
     }
-
-// method to get confessions by Creation Date
-    public static Confession getConfessionByDate(String creation_date) {
-    String query = String.format("SELECT * FROM storeConfession_table " +
-                        "WHERE creation_date CONTAINS '%%%s%%'  ",
-                creation_date);
-// return
-    }
-*/
-
-
 
     public static void main(String args[]) {
         System.out.println("Hello");

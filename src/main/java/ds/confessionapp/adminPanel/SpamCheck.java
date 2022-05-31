@@ -1,8 +1,11 @@
 package ds.confessionapp.adminPanel;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,15 +31,15 @@ public class SpamCheck {
         }
     }//end of class values
 
-    public double score(String text1, String text2) {
-        //1. Identify distinct words from both documents
-        String[] text1Words = text1.split(" ");
-        String[] text2Words = text2.split(" ");
+    public double score(String newConfessionPost, String comparedFile) {
+        //Identify distinct words from both documents
+        String[] newConfessionPostWords = newConfessionPost.split(" ");
+        String[] comparedFileWords = comparedFile.split(" ");
         Map<String, Values> wordFreqVector = new HashMap<>();
         List<String> distinctWords = new ArrayList<>();
 
-        //prepare word frequency vector by using Text1
-        for (String text : text1Words) {
+        //prepare word frequency vector by using newConfessionPost
+        for (String text : newConfessionPostWords) {
             String word = text.trim();
             if (!word.isEmpty()) {
                 if (wordFreqVector.containsKey(word)) {
@@ -53,8 +56,8 @@ public class SpamCheck {
             }
         }
 
-        //prepare word frequency vector by using Text2
-        for (String text : text2Words) {
+        //prepare word frequency vector by using comparedFile
+        for (String text : comparedFileWords) {
             String word = text.trim();
             if (!word.isEmpty()) {
                 if (wordFreqVector.containsKey(word)) {
@@ -75,6 +78,7 @@ public class SpamCheck {
         double vectAB = 0.0000000;
         double vectA = 0.0000000;
         double vectB = 0.0000000;
+
         for (int i = 0; i < distinctWords.size(); i++) {
             Values vals12 = wordFreqVector.get(distinctWords.get(i));
             double freq1 = vals12.val1;
@@ -92,16 +96,54 @@ public class SpamCheck {
     public static void main(String[] args) throws IOException {
         SpamCheck cs = new SpamCheck();
 
-        String text1 = Files.readAllLines(Paths.get("tempFiles/newPost.txt")).stream().collect(Collectors.joining(" "));
-        String text2 = Files.readAllLines(Paths.get("InputFiles/#UM011422.txt")).stream().collect(Collectors.joining(" "));
+        Path newConfessionPostPath = Path.of("tempFiles/newPost.txt");
+        String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(" "));
+        String comparedFile = Files.readAllLines(Paths.get("InputFiles/#UM0002.txt")).stream().collect(Collectors.joining(" "));
 
-        double score = cs.score(text1, text2);
+        double score = cs.score(newConfessionPost, comparedFile);
         System.out.println("Cosine similarity score = " + score);
 
+        //if similarity less than 0.9, move the file to InputFiles so it cant be queued to be post
         if(score < 0.90){
-            //file will be saved to InputFiles
+            System.out.println("File will be moved");
+            String newFileName = "";
+
+//            int num = 0;
+//            String save = at.getText().toString() + ".txt";
+//            File file = new File(newConfessionPost, save);
+//            while(file.exists()) {
+//                save = at.getText().toString() + (num++) +".txt";
+//                file = new File(myDir, save);
+//            }
+
+            String newPath = "InputFiles/newPost.txt";
+            //test
+            //String newPath = "InputFiles/" + "#UM0005" + ".txt"; //this works
+
+            //Increment filename if file exists
+//            int num = 0;
+//            String save = at.getText().toString() + ".txt";
+//            File file = new File("InputFiles", save);
+//            while(file.exists()) {
+//                save = at.getText().toString() + (num++) +".txt";
+//                file = new File("InputFiles", save);
+//            }
+
+            Path temp = Files.move(newConfessionPostPath,Paths.get(newPath));
+
+            if(temp != null)
+            {
+                System.out.println("-----------------------------------");
+                System.out.println("File renamed and moved successfully");
+                System.out.println("-----------------------------------");
+            }
+            else
+            {
+                System.out.println("Failed to move the file");
+            }
         }else{
             //delete file / masuk bin
+            System.out.println("Deleting the file");
         }
 
     }
