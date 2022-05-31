@@ -27,16 +27,7 @@ public class Main extends Application {
         primaryStage.setTitle("Confession App");
         primaryStage.setScene(new Scene(root, 765, 480)); //width height
         primaryStage.show();
-//        Button button = new Button("test");
-//        pane.getChildrenUnmodifiable().add(button);
 
-//        primaryStage.setOnCloseRequest(event -> {
-//            try {
-//                userLogOut(primaryStage);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
     }
 
     public void changeScene(String fxml) throws IOException{
@@ -46,19 +37,6 @@ public class Main extends Application {
 
     }
 
-    public void userLogOut(Stage primaryStage) throws IOException{
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Close");
-        alert.setHeaderText("You're about to close the windows");
-        alert.setContentText("Do you want to save before exiting?");
-
-        if (alert.showAndWait().get() == ButtonType.OK){
-            Main main = new Main();
-            main.changeScene("LoginForm.fxml");
-            System.out.println("Successfully logged out");
-        }
-
-    }
 
     public static void main(String[] args) {
         launch();

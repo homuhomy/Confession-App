@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,6 +20,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
+            <Button fx:id="backForsubmitpage" layoutX="504.0" layoutY="387.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
             <Label layoutX="149.0" layoutY="115.0" text="Write your confession!" />
             <HBox alignment="CENTER" layoutX="146.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="474.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
                <children>
@@ -35,7 +36,6 @@
                   <TextField alignment="CENTER" prefHeight="33.0" prefWidth="100.0" promptText="#UM000000" style="-fx-background-color: transparent;" />
                </children>
             </HBox>
-            <Button layoutX="504.0" layoutY="387.0" mnemonicParsing="false" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

@@ -45,18 +45,19 @@
                </font>
             </Text>
             <TextField layoutX="449.0" layoutY="136.0" prefHeight="26.0" prefWidth="130.0" promptText="Search confession" />
-            <Button fx:id="submitButton" layoutX="160.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" textFill="WHITE" />
+            <Button fx:id="submitButton" layoutX="160.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" textFill="WHITE" />
             <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="592.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Button fx:id="viewButton" layoutX="306.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switc" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions" textFill="WHITE" />
+            <Button fx:id="viewButton" layoutX="306.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions" textFill="WHITE" />
             <ImageView fitHeight="276.0" fitWidth="453.0" layoutX="150.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/students_main.png" />
                </image>
             </ImageView>
+            <Button fx:id="admin" layoutX="671.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchScenes" text="Admin" />
          </children>
       </AnchorPane>
    </center>

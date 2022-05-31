@@ -4,6 +4,7 @@ import ds.confessionapp.adminPanel.Queue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.*;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,44 +12,59 @@ import java.util.concurrent.TimeUnit;
 
 public class waitingList {
 
-    public static void main(String[] args) {
-        String data="";
+    public static void main(String[] args) throws SQLException {
+        String confession="";
         Queue<String> confess = new Queue<>();
+        Queue<String> Replyconfess = new Queue<>();
         String full ;
         int i=0;
-        try {
-            File myObj = new File("C:\\Users\\User\\IdeaProjects\\Confession-App\\InputFiles\\#UM011411.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
+//        try {
+//            File myObj = new File("C:\\Users\\User\\IdeaProjects\\Confession-App\\InputFiles\\#UM011411.txt");
+//            Scanner myReader = new Scanner(myObj);
+//            while (myReader.hasNextLine()) {
+////                System.out.println(myReader.nextLine() + " " + i);
+//
+//                String replyConfess = myReader.nextLine();
+////                System.out.println(replyConfess.substring(0,8));
+////                System.out.println(replyConfess.substring(0));
+//                if(replyConfess.substring(0,8).equalsIgnoreCase("replying")) {
+//                    System.out.println(replyConfess.toString());
+//                    Replyconfess.enqueue(replyConfess);
+//                }
+////                else{
+////                confession += replyConfess;
+////                if(replyConfess.equals("\n")){
+////                    System.out.println("The confession");
+////                    confess.enqueue(confession);
+////                    System.out.println(confess.toString());
+////                    confession="";
+////                }
+////                }
+//                i++;
+//            }
+//
+//            myReader.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
 
-                String temp = myReader.nextLine()+"\n";
-                data += temp; i++;
-                if(temp.equals("\n")){
-                    confess.enqueue(data);
-                    System.out.println("Next confession");
-                    data="";
-                }
+        try{
+            String string = "#UM011411";
+            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM storeConfession_table WHERE confession_id = '"+string+"'");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-                System.out.println("i = " + i);
-//                System.out.println(data);
-
+            while(resultSet.next()){
+                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
             }
-//            System.out.println(data);
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-        confess.enqueue(data);
-//        String con = "Hello world";
-//
-//        String [] elements =  con.split(" ");
-//        int j;
-//        for(j =0; j<elements.length; j++)
-//            System.out.println(elements[j]);
+        confess.enqueue(confession);
 
-//            confess.enqueue(data);
+//            confess.enqueue(confession);
 
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
