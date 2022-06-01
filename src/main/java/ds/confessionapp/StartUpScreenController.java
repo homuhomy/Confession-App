@@ -23,8 +23,11 @@ public class StartUpScreenController implements Initializable {
 
 
     @FXML
-    public Button submitButton, viewButton, backForsubmitpage, backforviewpage, admin, backForadmin;
+    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel;
     public TextField input, pswdinput;
+
+    public Label XsuccessLabel;
+
     public void switchScenes(ActionEvent event) throws Exception {
         Stage stage = null;
         Parent root = null;
@@ -61,6 +64,20 @@ public class StartUpScreenController implements Initializable {
             root = FXMLLoader.load(getClass().getResource("AdminLogin.fxml"));
         }
 
+        else if(event.getSource()==login){
+            stage = (Stage) login.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("AdminLogin.fxml"));
+        }
+
+        else if(event.getSource()==ok){
+            stage = (Stage) ok.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("AdminPanel.fxml"));
+        }
+
+        else if(event.getSource()==backforAdminPanel){
+            stage = (Stage) backforAdminPanel.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        }
 
 
         Scene scene = new Scene(root);
@@ -68,15 +85,27 @@ public class StartUpScreenController implements Initializable {
         stage.show();
 
     }
-
+    public void Success(){
+        XsuccessLabel.setVisible(true);
+        XsuccessLabel.setText("Login Successful!\nPress 'OK' to continue ");
+        ok.setVisible(true);
+    }
+    @FXML
+    public void Xsuccess(){
+        XsuccessLabel.setText("Login Unsuccessful!\nPlease try again");
+        ok.setVisible(false);
+    }
+    @FXML
 
     public void loginAction(ActionEvent event){
         int ans = verify(input.getText(),pswdinput.getText());
         if(ans==1){
-            System.out.println("Success");;
+
+            Success();
+
         }
         else
-            System.out.println("not Successful");
+           Xsuccess();
 //            System.exit(0);
     }
 

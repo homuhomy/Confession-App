@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,8 +21,10 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="346.0" layoutY="194.0" mnemonicParsing="false" onAction="#loginAction" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Login" />
+            <Button fx:id="login" layoutX="346.0" layoutY="194.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#switchScenes" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Login" />
             <Button fx:id="backForadmin" layoutX="494.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
+            <Button fx:id="ok" layoutX="275.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchScenes" text="Ok" visible="false"/>
+            <Label fx:id="XsuccessLabel" layoutX="271.0" layoutY="274.0" text="Status" visible="false"/>
          </children>
       </AnchorPane>
    </children>
