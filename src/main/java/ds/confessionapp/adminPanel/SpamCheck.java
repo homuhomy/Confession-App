@@ -4,20 +4,16 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SpamCheck {
 
     //using Consine Similarity
     private static class Values {
 
-        private int val1;
-        private int val2;
+        private int val1, val2;
 
         private Values(int v1, int v2) {
             this.val1 = v1;
@@ -97,23 +93,44 @@ public class SpamCheck {
 
         Path newConfessionPostPath = Path.of("tempFiles/newPost.txt");
         String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(" "));
-        String comparedFile = Files.readAllLines(Paths.get("InputFiles/#UM0002.txt")).stream().collect(Collectors.joining(" "));
 
-        double score = cs.score(newConfessionPost, comparedFile);
-        System.out.println("Cosine similarity score = " + score);
+        String comparedFile = "";
 
-        //if similarity less than 0.9, move the file to InputFiles so it cant be queued to be post
-        if (score < 0.90) {
-            System.out.println("File will be moved");
-            String newFileName = "";
+        //loop this
+        double score = 0;
 
-            //loop through the files in InputFiles and get the LATEST file name
-            //substring the latest file / or get index of the latestFinalName
-            // eg: #UM0004.txt
-            String latestFileName = getLatestFileName().substring(3,7);
-            int number = Integer.parseInt(latestFileName) + 1; //increase the number
+        File directoryPath = new File("InputFiles");
+        //List of all files and directories
+        String contents[] = directoryPath.list();
+        //make it so that once it have been deleted it will get out of for loop
+        for (int i = 0; i < contents.length; i++) {
+                System.out.println(contents[i]);
 
+                comparedFile = Files.readAllLines(Paths.get("InputFiles/" + contents[i])).stream().collect(Collectors.joining(" "));
 
+                score = cs.score(newConfessionPost, comparedFile);
+                System.out.println("Cosine similarity score = " + score);
+
+                if (score > 0.90) {
+                    //delete file
+                    System.out.println("Deleting the file");
+                    File file = new File("tempFiles/newPost.txt");
+                    file.delete();
+
+                    System.out.println("----------------------------------------");
+                    System.out.println("File have been removed successfully");
+                    System.out.println("----------------------------------------");
+
+                    break;
+
+                } else if(i == contents.length - 1){
+                    System.out.println("File will be moved");
+
+                    //loop through the files in InputFiles and get the LATEST file name
+                    //substring the latest file / or get index of the latestFinalName
+                    // eg: #UM0004.txt
+                    String latestFileName = getLatestFileName().substring(3, 7);
+                    int number = Integer.parseInt(latestFileName) + 1; //increase number for the new file
 
             /*  % denotes that it's a formatting instruction
                     0 is a flag that says pad with zero
@@ -122,47 +139,74 @@ public class SpamCheck {
                     d is for decimal which means the next argument should be an
                     integral value e.g. byte, char, short, int, or long. */
 
-            String str = String.format("%04d", number);  // 0009
-            String newPostNewName = "#UM" + str + ".txt";
+                    String str = String.format("%04d", number);  // 000x //x is nummber
+                    String newPostNewName = "#UM" + str + ".txt";
 
-            String newPath = "InputFiles/" + newPostNewName;
+                    String newPath = "InputFiles/" + newPostNewName;
 
-            Path temp = Files.move(newConfessionPostPath, Paths.get(newPath));
+                    Path temp = Files.move(newConfessionPostPath, Paths.get(newPath));
 
-            if (temp != null) {
-                System.out.println("-----------------------------------");
-                System.out.println("File moved successfully");
-                System.out.println("-----------------------------------");
+                    System.out.println("------------------------------------------------");
+                    System.out.println("File have been moved and renamed successfully");
+                    System.out.println("------------------------------------------------");
 
-            } else {
-                System.out.println("Failed to move the file");
+                    break;
+                }
+                else{
+                    continue;
+                }
+
             }
-        } else {
-            //delete file / masuk bin
-            System.out.println("Deleting the file");
         }
 
-    }
-    public static String getLatestFileName()
-    {
+//    public static String getLatestFileName() {
+//        File directory = new File("InputFiles");
+//        File[] files = directory.listFiles(File::isFile);
+//        long lastModifiedTime = Long.MIN_VALUE;
+//        File chosenFile = null;
+//
+//        if (files != null) {
+//            for (File file : files) {
+//                if (file.lastModified() > lastModifiedTime) {
+//                    chosenFile = file;
+//                    lastModifiedTime = file.lastModified();
+//                }
+//            }
+//        }
+//
+//        return chosenFile.getName();
+//    }
+
+    public static String getLatestFileName() {
         File directory = new File("InputFiles");
         File[] files = directory.listFiles(File::isFile);
-        long lastModifiedTime = Long.MIN_VALUE;
         File chosenFile = null;
-
-        if (files != null)
-        {
-            for (File file : files)
-            {
-                if (file.lastModified() > lastModifiedTime)
-                {
-                    chosenFile = file;
-                    lastModifiedTime = file.lastModified();
-                }
+        Arrays.sort(files, new Comparator<>() {
+            @Override
+            public int compare(File o1, File o2) {
+                int n1 = extractNumber(o1.getName());
+                int n2 = extractNumber(o2.getName());
+                return n1 - n2;
             }
-        }
 
+            private int extractNumber(String name) {
+                int i = 0;
+                try {
+                    int s = name.indexOf('M') + 1;
+                    int e = name.lastIndexOf('.');
+                    String number = name.substring(s, e);
+                    i = Integer.parseInt(number);
+                } catch (Exception e) {
+                    i = 0; // if filename does not match the format
+                    // then default to 0
+                }
+                return i;
+            }
+        });
+
+        for(File f : files) {
+            chosenFile = f;
+        }
         return chosenFile.getName();
     }
-
 }
