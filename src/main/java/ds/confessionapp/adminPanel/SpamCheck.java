@@ -1,7 +1,6 @@
 package ds.confessionapp.adminPanel;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -104,48 +103,66 @@ public class SpamCheck {
         System.out.println("Cosine similarity score = " + score);
 
         //if similarity less than 0.9, move the file to InputFiles so it cant be queued to be post
-        if(score < 0.90){
+        if (score < 0.90) {
             System.out.println("File will be moved");
             String newFileName = "";
 
-//            int num = 0;
-//            String save = at.getText().toString() + ".txt";
-//            File file = new File(newConfessionPost, save);
-//            while(file.exists()) {
-//                save = at.getText().toString() + (num++) +".txt";
-//                file = new File(myDir, save);
-//            }
+            //loop through the files in InputFiles and get the LATEST file name
+            //substring the latest file / or get index of the latestFinalName
+            // eg: #UM0004.txt
+            String latestFileName = getLatestFileName().substring(3,7);
+            int number = Integer.parseInt(latestFileName) + 1; //increase the number
 
-            String newPath = "InputFiles/newPost.txt";
-            //test
-            //String newPath = "InputFiles/" + "#UM0005" + ".txt"; //this works
 
-            //Increment filename if file exists
-//            int num = 0;
-//            String save = at.getText().toString() + ".txt";
-//            File file = new File("InputFiles", save);
-//            while(file.exists()) {
-//                save = at.getText().toString() + (num++) +".txt";
-//                file = new File("InputFiles", save);
-//            }
 
-            Path temp = Files.move(newConfessionPostPath,Paths.get(newPath));
+            /*  % denotes that it's a formatting instruction
+                    0 is a flag that says pad with zero
+                    4 denotes the length of formatted String,
+                    this will ensure that the right number of zero should be added
+                    d is for decimal which means the next argument should be an
+                    integral value e.g. byte, char, short, int, or long. */
 
-            if(temp != null)
-            {
+            String str = String.format("%04d", number);  // 0009
+            String newPostNewName = "#UM" + str + ".txt";
+
+            String newPath = "InputFiles/" + newPostNewName;
+
+            Path temp = Files.move(newConfessionPostPath, Paths.get(newPath));
+
+            if (temp != null) {
                 System.out.println("-----------------------------------");
-                System.out.println("File renamed and moved successfully");
+                System.out.println("File moved successfully");
                 System.out.println("-----------------------------------");
-            }
-            else
-            {
+
+            } else {
                 System.out.println("Failed to move the file");
             }
-        }else{
+        } else {
             //delete file / masuk bin
             System.out.println("Deleting the file");
         }
 
+    }
+    public static String getLatestFileName()
+    {
+        File directory = new File("InputFiles");
+        File[] files = directory.listFiles(File::isFile);
+        long lastModifiedTime = Long.MIN_VALUE;
+        File chosenFile = null;
+
+        if (files != null)
+        {
+            for (File file : files)
+            {
+                if (file.lastModified() > lastModifiedTime)
+                {
+                    chosenFile = file;
+                    lastModifiedTime = file.lastModified();
+                }
+            }
+        }
+
+        return chosenFile.getName();
     }
 
 }
