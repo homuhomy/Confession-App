@@ -75,7 +75,8 @@
             </AnchorPane>
             <AnchorPane layoutX="51.0" layoutY="70.0" prefHeight="360.0" prefWidth="410.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
                <children>
-                  <Label layoutX="50.0" layoutY="163.0" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" />
+                  <Label fx:id="confessions" layoutX="50.0" layoutY="163.0" onDragDetected="#PostConfessions" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" visible="false"/>
+                  <Button fx:id="viewconfessionsbutton" layoutX="116.0" layoutY="159.0" mnemonicParsing="false" onAction="#switchScenes" text="Click Here to View Confessions" />
                </children>
             </AnchorPane>
             <Button fx:id="backForadmin" layoutX="475.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />

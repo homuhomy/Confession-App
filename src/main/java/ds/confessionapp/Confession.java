@@ -14,6 +14,7 @@ public class Confession {
     private String reply_id;
     private String creation_date;
 
+    public Confession(){}
     // create a new confession object with all parameters except reply ID
     public Confession(String confession_id, String file_content, String creation_date) {
         this.confession_id = confession_id;

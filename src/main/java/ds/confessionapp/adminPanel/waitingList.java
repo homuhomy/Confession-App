@@ -1,6 +1,10 @@
 package ds.confessionapp.adminPanel;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.sql.*;
+import java.util.Scanner;
+import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -9,8 +13,7 @@ public class waitingList {
     static Queue<String> confess = new Queue<>();
     public static void QueueList(){
 
-
-
+        //queues everything in the Queue
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content FROM storeConfession_table ");
@@ -27,22 +30,6 @@ public class waitingList {
             throw new RuntimeException(e);
         }
 
-//
-//        Runnable task1 = () -> System.out.println(confess);
-//
-//        //if elements are 5 elements or less
-//        if(i<=5)
-//            executorService.schedule(task1, 5, TimeUnit.SECONDS);
-//
-//        //if elements are 10 elements or less
-//        else if(i<=10)
-//            executorService.schedule(task1, 10, TimeUnit.SECONDS);
-//
-//        //if more than 10 elements
-//        else
-//            executorService.schedule(task1, 15, TimeUnit.SECONDS);
-//
-//        executorService.shutdown();
     }
 
 
@@ -53,7 +40,7 @@ public class waitingList {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             QueueList();
-            Runnable task1 = () -> System.out.println(confess.dequeue() + " "+confess.dequeue()); //pop data meaning show in public post
+            Runnable task1 = () -> confess.dequeue(); //pop data meaning show in public post
 
             ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
@@ -79,8 +66,19 @@ public class waitingList {
         }
     }
 
+
+    public static String batchRemoval(int i){
+
+        return confess.remove(i);
+    }
+
     public static void main(String[] args) {
         WaitingList();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter an int: ");
+        int num = sc.nextInt();
+        batchRemoval(num);
+        System.out.println(confess.toString());
     }
 
 }

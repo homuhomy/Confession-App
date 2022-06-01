@@ -14,7 +14,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="556.0" layoutY="387.0" mnemonicParsing="false" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit" textFill="WHITE" />
+            <Button fx:id="submit" layoutX="556.0" layoutY="387.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit" textFill="WHITE" />
             <Label layoutX="149.0" layoutY="50.0" text="Reply ID (Leave blank if none) :">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -24,7 +24,7 @@
             <Label layoutX="149.0" layoutY="115.0" text="Write your confession!" />
             <HBox alignment="CENTER" layoutX="146.0" layoutY="146.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="229.0" prefWidth="474.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
                <children>
-                  <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.6" prefHeight="234.0" prefWidth="449.0" promptText="Type your confession here" scaleShape="false" styleClass="textField" stylesheets="@Stylesheet.css">
+                  <TextArea fx:id="confession" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.6" prefHeight="234.0" prefWidth="449.0" promptText="Type your confession here" scaleShape="false" styleClass="textField" stylesheets="@Stylesheet.css">
                      <cursor>
                         <Cursor fx:constant="TEXT" />
                      </cursor>

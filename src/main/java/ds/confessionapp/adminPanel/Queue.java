@@ -49,6 +49,15 @@ public class Queue<E> {
         return list.isEmpty();
     }
 
+    public E remove(int i){
+        E elements = list.peek();
+        for(int j=0; j<i;i++) {
+            elements = (E) ("" + list.get(j));
+            list.remove(j);
+        }
+        return elements;
+    }
+
     @Override
     public String toString() {
         return "Queue: " + list.toString();
