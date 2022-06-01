@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class SpamCheck {
 
@@ -159,23 +158,6 @@ public class SpamCheck {
             }
         }
 
-//    public static String getLatestFileName() {
-//        File directory = new File("InputFiles");
-//        File[] files = directory.listFiles(File::isFile);
-//        long lastModifiedTime = Long.MIN_VALUE;
-//        File chosenFile = null;
-//
-//        if (files != null) {
-//            for (File file : files) {
-//                if (file.lastModified() > lastModifiedTime) {
-//                    chosenFile = file;
-//                    lastModifiedTime = file.lastModified();
-//                }
-//            }
-//        }
-//
-//        return chosenFile.getName();
-//    }
 
     public static String getLatestFileName() {
         File directory = new File("InputFiles");
