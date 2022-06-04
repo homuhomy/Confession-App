@@ -3,16 +3,13 @@ package ds.confessionapp;
 import ds.confessionapp.adminPanel.DatabaseCheck;
 import ds.confessionapp.adminPanel.DatabaseLoadData;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Confession {
-    private String confession_id;
-    private String file_content;
-    private String reply_id;
-    private String creation_date;
+    private  String confession_id;
+    private  String file_content;
+    private  String reply_id;
+    private  String creation_date;
 
     public Confession(){}
     // create a new confession object with all parameters except reply ID
@@ -21,9 +18,6 @@ public class Confession {
         this.file_content = file_content;
         this.creation_date = creation_date;
     }
-
-    // Submit a confession and store in tempFolder  --> ???
-
 
     // create a new confession object with all parameters
     public Confession(String confession_id, String file_content, String reply_id, String creation_date) {
@@ -34,38 +28,30 @@ public class Confession {
     }
 
     // Getters and setters
-    public String getConfessionID() {
-        return confession_id;
+    public String getConfessionID() { return confession_id;
     }
 
 
-    public String getContent() {
-        return file_content;
+    public String getContent() { return file_content;
     }
 
-    public String getReplyID() {
-        return reply_id;
+    public String getReplyID() { return reply_id;
     }
 
-    public String getCreationDate() {
-        return creation_date;
+    public String getCreationDate() { return creation_date;
     }
 
-    public void setContent(String file_content) {
-        this.file_content = file_content;
+    public void setContent(String file_content) { this.file_content = file_content;
     }
 
 
-    public void setConfessionID(String confession_id) {
-        this.confession_id = confession_id;
+    public void setConfessionID(String confession_id) { this.confession_id = confession_id;
     }
 
-    public void setReply_id(String reply_id) {
-        this.reply_id = reply_id;
+    public void setReply_id(String reply_id) { this.reply_id = reply_id;
     }
 
-    public void setCreation_date(String creation_date) {
-        this.creation_date = creation_date;
+    public void setCreation_date(String creation_date) { this.creation_date = creation_date;
     }
 
     @Override
@@ -78,72 +64,92 @@ public class Confession {
         return details;
     }
 
-    // inserting InputFiles into database
-
-
-
     /*
     // view published confessions from database
     // return all published confessions from database
-    public static Confession viewPublishedConfession() {
-
-
-
-  //  }
-
-
-     */
-
-    /*
-    public static Confession getNextConfession() {
+    public static Confession viewConfession() {
+    String query = "SELECT * FROM storeConfession_table " +
+                "ORDER BY confession_id file_content " +
+                "LIMIT 50";
+//        return Database.getDBObjects(query, xxxxx.class, 50); // cant use this method dont know why
 
     }
 
-    public static Confession getPreviousConfession() {
+    public static void getNextConfession() {
+
+    }
+
+    public static void getPreviousConfession() {
     }
 
     public static getConfessionReplies(String confession_id) {
-if (!reply_id.equals)
+    if (!reply_id.equals)
     }
 
      */
 
     // for searching purposes
+// method to get confessions by keywords
+    public static void findByKeywords(String file_content) {
+    try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT file_content FROM storeConfession_table WHERE file_content CONTAINS '%%%s%%'");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
 
+            while (resultSet.next()) {
+                resultSet.getString("confession_id");
+                resultSet.getString("file_content");
 
-/*// method to get confessions by keywords
-    public static Confession getConfessionByKeywords(String file_content) {
-    String query = String.format("SELECT * FROM storeConfession_table " +
-                        "WHERE file_content CONTAINS '%%%s%%'  ",
-                file_content);
-        return DatabaseLoadData.getDBObjects(query, storeConfession_table.class, -1);    // there's something wrong here at the return statement
-
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 // method to get confessions by Confession ID
-    public static Confession getConfessionByConfessionID(String confession_id) {
-    String query = String.format("SELECT * FROM storeConfession_table " +
-                        "WHERE confession_id CONTAINS '%%%s%%'  ",
-                confession_id);
-// return
+    public static void findbyID (String confession_id) {
+   try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT file_content FROM storeConfession_table WHERE confession_id = '%s'");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-    }*/
 
-//// method to get confessions by Creation Date
-//    public static Confession getConfessionByDate(String creation_date) {
-//    String query = String.format("SELECT * FROM storeConfession_table " +
-//                        "WHERE creation_date CONTAINS '%%%s%%'  ",
-//                creation_date);
-//// return
-//    }
+            while (resultSet.next()) {
+                resultSet.getString("file_content");
 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+// method to get confessions by Creation Date
+    public static Confession findByCreationDate(String creation_date) {
+    try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content FROM storeConfession_table WHERE creation_date = '%%%s%%'");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+
+            while (resultSet.next()) {
+                resultSet.getString("confession_id");
+                resultSet.getString("file_content");
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+/*
+// anati's example
     // method to get confessions by Confession ID
-    Connection connection = null;
-    ResultSet rs = null;
-    PreparedStatement ps = null;
+   static Connection connection = null;
+     ResultSet rs = null;
+     PreparedStatement ps = null;
 
-    public ResultSet findByID(String s) throws SQLException {
+    public static ResultSet findByID(String s) throws SQLException {
         connection = DatabaseCheck.getConnection();
         ps = connection.prepareStatement("SELECT * FROM storeConfession_table " +
                 "WHERE confession_id = ?");
@@ -151,11 +157,10 @@ if (!reply_id.equals)
         return rs;
 
     }
-
+*/
     public static void main(String args[]) {
         System.out.println("Hello");
     }
 }
-
 
 
