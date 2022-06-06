@@ -18,12 +18,13 @@ import java.util.stream.Stream;
 /* WHAT TO FIX
 *  make it so that files that already in DB no need to save again in the database
 * */
-class DatabaseSaveData {
+public class DatabaseSaveData {
 
-    public static void main(String[] args) throws SQLException {
+    public static void Savedata() throws SQLException {
 
         //insert value to the table //? represent placeholder
         //add date creation for when the confession is made
+
         String SQL = "INSERT INTO storeConfession_table (confession_id,file_content,reply_id,creation_date)VALUES(?,?,?,?)";
 
         Path dir = Paths.get("InputFiles"); //creates a Path object called dir that points to where it will be getting its files from.

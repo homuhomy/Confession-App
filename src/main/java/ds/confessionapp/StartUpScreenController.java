@@ -1,6 +1,8 @@
 package ds.confessionapp;
 
+import ds.confessionapp.adminPanel.DatabaseSaveData;
 import ds.confessionapp.adminPanel.Queue;
+import ds.confessionapp.adminPanel.SpamCheck;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,11 +32,22 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class StartUpScreenController implements Initializable {
+class Helper extends TimerTask{
 
+    @Override
+    public void run() {
+        System.out.println("works");
+    }
+}
+
+
+
+public class StartUpScreenController implements Initializable {
+    Confession c = new Confession();
+    SpamCheck s = new SpamCheck();
     @FXML
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit;
-    public TextField input, pswdinput;
+    public TextField input, pswdinput, confessID;
     public TextArea confession;
     public Label XsuccessLabel, confessions;
 
@@ -67,25 +83,22 @@ public class StartUpScreenController implements Initializable {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println("hi");
-
+                    confess.dequeue();
                 }
             };
-            boolean status = resultSet.next();
-            while(!resultSet.isAfterLast()){
+            while(!resultSet.next()){
 
-                if(resultSet.getInt("count(file_content)")<=3){
+                if(resultSet.getInt("count(file_content)")<=5){
                     timer.scheduleAtFixedRate(task,10, 10);
-                    timer.cancel();
+
                 }
-                else if(resultSet.getInt("count(file_content)")<=5){
+                else if(resultSet.getInt("count(file_content)")<=10){
                     timer.scheduleAtFixedRate(task,20, 20);
-                    timer.cancel();
+
                 }
                 else {
                     timer.schedule(task,0,15);
                 }
-//            status = resultSet.next();
             }
 
         } catch (SQLException e) {
@@ -93,7 +106,14 @@ public class StartUpScreenController implements Initializable {
         }
     }
 
-
+    DatabaseSaveData d = new DatabaseSaveData();
+    public static void main(String[] args) {
+//        Timer timer = new Timer();
+//        TimerTask task = new Helper();
+//
+//        timer.schedule(task, 200,5000);
+        WaitingList();
+    }
 
     public void switchScenes(ActionEvent event) throws Exception {
         Stage stage = null;
@@ -157,10 +177,18 @@ public class StartUpScreenController implements Initializable {
         else if(event.getSource()==submit){
             //send confession to database
             //Adlina's code comes here
-            confess.enqueue(confession.getText());
+            try{
+            File newFile = new File("tempFiles/newPosts.txt");
+            FileWriter w = new FileWriter("tempFiles/newPosts.txt");
+            w.write(confession.getText()); //writes in the file.
+            w.close();
+            newFile.createNewFile();} catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            s.spam(confession.getText());
             confession.setText("");
-            WaitingList();
-            System.out.println(confess.toString()); //to check the enqueuing method
+            confessID.setText("");
+
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -176,6 +204,7 @@ public class StartUpScreenController implements Initializable {
     }
     @FXML
     public void Xsuccess(){
+        XsuccessLabel.setVisible(true);
         XsuccessLabel.setText("Login Unsuccessful!\nPlease try again");
         ok.setVisible(false);
     }
@@ -184,12 +213,11 @@ public class StartUpScreenController implements Initializable {
     public void loginAction(ActionEvent event){
         int ans = verify(input.getText(),pswdinput.getText());
         if(ans==1){
-
             Success();
-
         }
-        else
+        else{
            Xsuccess();
+        }
 //            System.exit(0);
     }
 
@@ -223,4 +251,6 @@ public class StartUpScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
 }

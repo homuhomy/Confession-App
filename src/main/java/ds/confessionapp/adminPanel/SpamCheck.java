@@ -87,11 +87,12 @@ public class SpamCheck {
         return ((vectAB) / (Math.sqrt(vectA) * Math.sqrt(vectB)));
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void spam(String post) throws IOException {
         SpamCheck cs = new SpamCheck();
 
-        Path newConfessionPostPath = Path.of("tempFiles/newPost.txt");
-        String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(" "));
+        Path newConfessionPostPath = Path.of("tempFiles/newPosts.txt");
+        String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(post));
+
 
         String comparedFile = "";
 
@@ -113,7 +114,7 @@ public class SpamCheck {
                 if (score > 0.90) {
                     //delete file
                     System.out.println("Deleting the file");
-                    File file = new File("tempFiles/newPost.txt");
+                    File file = new File("tempFiles/newPost.txt.txt");
                     file.delete();
 
                     System.out.println("----------------------------------------");
