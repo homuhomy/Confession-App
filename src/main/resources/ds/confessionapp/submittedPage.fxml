@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
    <children>
       <Label layoutX="209.0" layoutY="174.0" text="Your confession has been submitted!">
@@ -18,8 +17,8 @@
             <Font name="PP Pangram Sans Light" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="283.0" layoutY="285.0" mnemonicParsing="false" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
-      <Button layoutX="348.0" layoutY="285.0" mnemonicParsing="false" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Go to confession page" />
+      <Button fx:id="submitButton" layoutX="283.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
+      <Button fx:id="viewButton" layoutX="348.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Go to confession page" />
       <Label layoutX="167.0" layoutY="240.0" text="Your post was submitted at :">
          <font>
             <Font name="PP Pangram Sans Light" size="14.0" />

@@ -93,7 +93,6 @@ public class SpamCheck {
         Path newConfessionPostPath = Path.of("tempFiles/newPosts.txt");
         String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(post));
 
-
         String comparedFile = "";
 
         //loop this
