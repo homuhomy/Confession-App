@@ -24,6 +24,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.*;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -48,7 +51,7 @@ public class StartUpScreenController implements Initializable {
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit;
     public TextField input, pswdinput, confessID;
     public TextArea confession;
-    public Label XsuccessLabel, confessions, newSubmissionTime;
+    public Label XsuccessLabel, confessions, SubmissionTime;
 
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
@@ -207,8 +210,20 @@ public class StartUpScreenController implements Initializable {
                 toNewTxtFile.close();
             }
 
+            //from here
+//            Path file = Paths.get(newPostName);
+//            BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
+//
+//            String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
+//                            .withZone(ZoneId.systemDefault())
+//                            .format(Instant.now());
+//            System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
+//            SubmissionTime.setText(s);
+            //to here
+
             stage = (Stage) submit.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submittedPage.fxml"));
+
 
         }
         Scene scene = new Scene(root);
@@ -228,7 +243,6 @@ public class StartUpScreenController implements Initializable {
         ok.setVisible(false);
     }
     @FXML
-
     public void loginAction(ActionEvent event){
         int ans = verify(input.getText(),pswdinput.getText());
         if(ans==1){
@@ -265,6 +279,19 @@ public class StartUpScreenController implements Initializable {
         confessions.setVisible(true);
         confessions.setText(confess.peek());
     }
+
+//    @FXML
+//    public void viewTime(){
+//        Path file = Paths.get(newPostName);
+//
+//        BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
+//
+//        System.out.println("Creation Time: " + attr.creationTime());
+//
+//        SubmissionTime.setVisible(true);
+//        SubmissionTime.setText("Login Unsuccessful!\nPlease try again");
+//        //ok.setVisible(false);
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
