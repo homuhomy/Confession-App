@@ -3,6 +3,10 @@ package ds.confessionapp;
 import ds.confessionapp.adminPanel.DatabaseSaveData;
 import ds.confessionapp.adminPanel.Queue;
 import ds.confessionapp.adminPanel.SpamCheck;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +19,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -24,10 +27,13 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -43,14 +49,17 @@ class Helper extends TimerTask{
 
 
 public class StartUpScreenController implements Initializable {
+    private int minute;
+    private int hour;
+    private int second;
     Confession c = new Confession();
     SpamCheck s = new SpamCheck();
     @FXML
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit;
     public TextField input, pswdinput, confessID;
     public TextArea confession;
-    public Label XsuccessLabel, confessions;
-
+    public Label XsuccessLabel, confessions, dateTime;
+    private volatile boolean stop = false;
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
     public static void QueueList(){
@@ -249,7 +258,21 @@ public class StartUpScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+       Thread thread = new Thread(()-> {
+           SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+           while(!stop){
+               try{
+                   Thread.sleep(1000);
+               }catch(Exception e){
+                   System.out.println(e);
+               }
+               final String timenow = sdf.format(new Date());
+               Platform.runLater(() ->{
+                   dateTime.setText(timenow);
+               });
+           }
+       });
+       thread.start();
     }
 
 
