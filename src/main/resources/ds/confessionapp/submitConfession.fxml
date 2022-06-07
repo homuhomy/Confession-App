@@ -33,7 +33,7 @@
             </HBox>
             <HBox layoutX="149.0" layoutY="76.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
                <children>
-                  <TextField fx:id="confessID" alignment="CENTER" prefHeight="33.0" prefWidth="100.0" promptText="#UM000000" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="confessID" alignment="CENTER" prefHeight="33.0" prefWidth="100.0" promptText="#UM0000" style="-fx-background-color: transparent;" />
                </children>
             </HBox>
          </children>

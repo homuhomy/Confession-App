@@ -3,6 +3,7 @@ package ds.confessionapp;
 import ds.confessionapp.adminPanel.DatabaseSaveData;
 import ds.confessionapp.adminPanel.Queue;
 import ds.confessionapp.adminPanel.SpamCheck;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,21 +17,19 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.*;
-import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import static ds.confessionapp.adminPanel.SpamCheck.getLatestFileName;
 
 class Helper extends TimerTask{
 
@@ -49,7 +48,7 @@ public class StartUpScreenController implements Initializable {
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit;
     public TextField input, pswdinput, confessID;
     public TextArea confession;
-    public Label XsuccessLabel, confessions;
+    public Label XsuccessLabel, confessions, newSubmissionTime;
 
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
@@ -175,27 +174,47 @@ public class StartUpScreenController implements Initializable {
 
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
-            //send confession to database
-            //Adlina's code comes here
-            try{
-            File newFile = new File("tempFiles/newPosts.txt");
-            FileWriter w = new FileWriter("tempFiles/newPosts.txt");
-            w.write(confession.getText()); //writes in the file.
-            w.close();
-            newFile.createNewFile();} catch (IOException e) {
-                throw new RuntimeException(e);
+            //submit new pst to tempFiles folder
+            String replyId = confessID.getText();
+
+            String content;
+            if(confessID.getText().isEmpty()){
+                content = confession.getText();
+            }else{
+                content = "Replying to " + replyId + "\n\n" + confession.getText();
             }
-            s.spam(confession.getText());
-            confession.setText("");
-            confessID.setText("");
+
+            File f= new File("tempFiles");
+            File[] listOfFiles = f.listFiles();
+
+            int number = 1;
+            if(listOfFiles.length > 0){ //if there's already existing files in tempFiles
+                String newName = getLatestFileNameTF().substring(7,8);
+                number = Integer.parseInt(newName) + 1;
+            }
+            String newPostName = "tempFiles/newPost" + number + ".txt";
+            BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
+            try {
+                toNewTxtFile.write(content);
+
+            }
+            catch (RuntimeException | IOException e)
+            {
+                e.printStackTrace();
+            }
+            finally
+            {
+                toNewTxtFile.close();
+            }
+
+            stage = (Stage) submit.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("submittedPage.fxml"));
 
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
     }
-
 
     public void Success(){
         XsuccessLabel.setVisible(true);
@@ -252,5 +271,37 @@ public class StartUpScreenController implements Initializable {
 
     }
 
+    public static String getLatestFileNameTF() {
+        File directory = new File("tempFiles");
+        File[] files = directory.listFiles(File::isFile);
+        File chosenFile = null;
+        Arrays.sort(files, new Comparator<>() {
+            @Override
+            public int compare(File o1, File o2) {
+                int n1 = extractNumber(o1.getName());
+                int n2 = extractNumber(o2.getName());
+                return n1 - n2;
+            }
+
+            private int extractNumber(String name) {
+                int i = 0;
+                try {
+                    int s = name.indexOf('t') + 1;
+                    int e = name.lastIndexOf('.');
+                    String number = name.substring(s, e);
+                    i = Integer.parseInt(number);
+                } catch (Exception e) {
+                    i = 0; // if filename does not match the format
+                    // then default to 0
+                }
+                return i;
+            }
+        });
+
+        for(File f : files) {
+            chosenFile = f;
+        }
+        return chosenFile.getName();
+    }
 
 }
