@@ -28,7 +28,7 @@ public class DatabaseSaveData {
         //uses this path object to get a FileInputStream object which is used as an input stream for reading data from files on disk
         //This method returns null if there was no file found or if there was an error opening it
         try (Stream<Path> list = Files.list(dir);
-             Connection connection = DatabaseCheck.getConnection();
+             Connection connection = DatabaseConnection.getConnection();
              PreparedStatement ps = connection.prepareStatement(SQL)) {
             List<Path> pathList = list.collect(Collectors.toList());
             System.out.println("Following files are saved in database:");

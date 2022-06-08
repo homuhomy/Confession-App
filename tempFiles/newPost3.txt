@@ -1,0 +1,27 @@
+ am trying to read data from a textarea (JTextArea) and 
+store the contents into a table(MySQL). 
+I don't want the INSERT query to execute if 
+the textarea is empty or has a newline without any text. 
+I tried the following code but it does not work. 
+Could someone help me out. Thanks.
+
+ am trying to read data from a textarea (JTextArea) and 
+store the contents into a table(MySQL). 
+I don't want the INSERT query to execute if 
+the textarea is empty or has a newline without any text. 
+I tried the following code but it does not work. 
+Could someone help me out. Thanks.
+
+ am trying to read data from a textarea (JTextArea) and 
+store the contents into a table(MySQL). 
+I don't want the INSERT query to execute if 
+the textarea is empty or has a newline without any text. 
+I tried the following code but it does not work. 
+Could someone help me out. Thanks.
+
+ am trying to read data from a textarea (JTextArea) and 
+store the contents into a table(MySQL). 
+I don't want the INSERT query to execute if 
+the textarea is empty or has a newline without any text. 
+I tried the following code but it does not work. 
+Could someone help me out. Thanks.

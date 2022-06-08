@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.SearchPageController">
+   <children>
+      <TextField fx:id="searchTextField" layoutX="217.0" layoutY="44.0" prefHeight="24.0" prefWidth="444.0" promptText="Keyword" />
+      <TableView fx:id="TableView" layoutX="102.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="561.0">
+        <columns>
+          <TableColumn fx:id="ConfessionIdColumn" prefWidth="100.0" text="Confession ID" />
+          <TableColumn fx:id="ConfessionColumn" prefWidth="259.0" text="Confession" />
+            <TableColumn fx:id="ReplyIdColumn" prefWidth="100.0" text="Reply ID" />
+            <TableColumn fx:id="DateColumn" prefWidth="100.0" text="Date" />
+        </columns>
+      </TableView>
+      <Label layoutX="102.0" layoutY="48.0" prefHeight="18.0" prefWidth="115.0" text="Search confession">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

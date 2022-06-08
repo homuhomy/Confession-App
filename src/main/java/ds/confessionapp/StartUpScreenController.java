@@ -15,7 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyEvent;
 
 
 import java.io.*;
@@ -44,12 +47,12 @@ class Helper extends TimerTask{
 
 public class StartUpScreenController implements Initializable {
 
-    Confession c = new Confession();
+    //Confession c = new Confession();
     SpamCheck s = new SpamCheck();
     @FXML
-    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit;
+    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search;
     @FXML
-    public TextField input, pswdinput, confessID;
+    public TextField input, pswdinput, confessID, searchField;
     @FXML
     public TextArea confession, displayTime;
     @FXML
@@ -131,6 +134,14 @@ public class StartUpScreenController implements Initializable {
             //confession.setWrapText(true);
             stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
+        }
+        else if(event.getSource().equals(KeyCode.ENTER)){
+            //stage = (Stage) submitButton.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
+        }
+        else if(event.getSource()==search){
+            stage = (Stage) search.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
         }
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
