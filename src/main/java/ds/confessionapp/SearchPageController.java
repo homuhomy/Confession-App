@@ -5,12 +5,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -35,20 +42,22 @@ public class SearchPageController implements Initializable {
     private TableColumn<ConfessionSearchModel, String> ConfessionIdColumn;
     @FXML
     private TextField searchTextField;
+    @FXML
+    private Button backButton;
 
     ObservableList<ConfessionSearchModel> confessionSearchModelObservableList = FXCollections.observableArrayList();
 
     @Override
-    public void initialize(URL url, ResourceBundle resource){
+    public void initialize(URL url, ResourceBundle resource) {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connection = DatabaseConnection.getConnection();
         String searchViewQuery = "SELECT confession_id,file_content,reply_id, creation_date FROM storeConfession_table";
 
-        try{
+        try {
             Statement statement = DatabaseConnection.getConnection().createStatement();
             ResultSet queryOutput = statement.executeQuery(searchViewQuery);
 
-            while(queryOutput.next()){
+            while (queryOutput.next()) {
 
                 String queryConfessionId = queryOutput.getString("confession_id");
                 String queryFileContent = queryOutput.getString("file_content");
@@ -70,19 +79,19 @@ public class SearchPageController implements Initializable {
             FilteredList<ConfessionSearchModel> filteredData = new FilteredList<>(confessionSearchModelObservableList, b -> true);
             searchTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
                 filteredData.setPredicate(confessionSearchModel -> {
-                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null){
+                    if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                         return true;
                     }
                     String searchKeyword = newValue.toLowerCase();
-                    if(confessionSearchModel.getConfession_id().toLowerCase().indexOf(searchKeyword) >-1){
+                    if (confessionSearchModel.getConfession_id().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true; //found a match for confession_id
-                    }else if(confessionSearchModel.getFile_content().toLowerCase().indexOf(searchKeyword) >-1){
+                    } else if (confessionSearchModel.getFile_content().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true; //found a match for confession_id
-                    }else if(confessionSearchModel.getReply_id().toLowerCase().indexOf(searchKeyword) >-1){
+                    } else if (confessionSearchModel.getReply_id().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true; //found a match for confession_id
-                    }else if(confessionSearchModel.getCreation_date().toLowerCase().indexOf(searchKeyword) >-1){
+                    } else if (confessionSearchModel.getCreation_date().toLowerCase().indexOf(searchKeyword) > -1) {
                         return true; //found a match for confession_id
-                    }else
+                    } else
                         return false; //no match found
                 });
             });
@@ -95,9 +104,23 @@ public class SearchPageController implements Initializable {
             //apply filtered and sorted data to the table view
             TableView.setItems(sortedData);
 
-        }catch (SQLException e){
-            Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE,null,e);
+        } catch (SQLException e) {
+            Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
+    public void switchScenes(ActionEvent event) throws Exception {
+        Stage stage = null;
+        Parent root = null;
+//        System.out.println(event.getSource());
+
+        if (event.getSource() == backButton) {
+            stage = (Stage) backButton.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        }
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 }
