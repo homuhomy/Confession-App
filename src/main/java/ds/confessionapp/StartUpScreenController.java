@@ -43,6 +43,7 @@ class Helper extends TimerTask{
 
 
 public class StartUpScreenController implements Initializable {
+
     Confession c = new Confession();
     SpamCheck s = new SpamCheck();
     @FXML
@@ -53,6 +54,7 @@ public class StartUpScreenController implements Initializable {
     public TextArea confession, displayTime;
     @FXML
     public Label XsuccessLabel, confessions, SubmissionTime, warningSubmit;
+
 
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
@@ -126,6 +128,7 @@ public class StartUpScreenController implements Initializable {
 //        System.out.println(event.getSource());
 
         if(event.getSource()== submitButton){
+            //confession.setWrapText(true);
             stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
