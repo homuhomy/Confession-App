@@ -93,7 +93,6 @@ public class SpamCheck {
         Path newConfessionPostPath = Path.of("tempFiles/newPosts.txt");
         String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(post));
 
-
         String comparedFile = "";
 
         //loop this
@@ -139,7 +138,7 @@ public class SpamCheck {
                     d is for decimal which means the next argument should be an
                     integral value e.g. byte, char, short, int, or long. */
 
-                    String str = String.format("%04d", number);  // 000x //x is nummber
+                    String str = String.format("%04d", number);  // 000x //x is number
                     String newPostNewName = "#UM" + str + ".txt";
 
                     String newPath = "InputFiles/" + newPostNewName;

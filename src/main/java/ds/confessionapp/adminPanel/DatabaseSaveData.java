@@ -8,23 +8,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* WHAT TO FIX
-*  make it so that files that already in DB no need to save again in the database
-* */
 public class DatabaseSaveData {
 
-    public static void Savedata() throws SQLException {
+    public static void main(String[] args) throws SQLException {
+
+        //only run this IF there's a new file detected in the InputFiles directory
 
         //insert value to the table //? represent placeholder
         //add date creation for when the confession is made
-
         String SQL = "INSERT INTO storeConfession_table (confession_id,file_content,reply_id,creation_date)VALUES(?,?,?,?)";
 
         Path dir = Paths.get("InputFiles"); //creates a Path object called dir that points to where it will be getting its files from.
@@ -74,7 +70,7 @@ public class DatabaseSaveData {
             for (int i : executeBatch) {
                 System.out.println(i);
             }
-        } catch (IOException e) {
+        } catch (BatchUpdateException | SQLIntegrityConstraintViolationException | IOException e) {
             e.printStackTrace();
         }
 
