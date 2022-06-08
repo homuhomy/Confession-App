@@ -58,7 +58,8 @@ public class StartUpScreenController implements Initializable {
     @FXML
     public Label XsuccessLabel, confessions, SubmissionTime, warningSubmit;
 
-
+    @FXML
+    Label st = new Label("submitTime");
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
 
@@ -222,15 +223,15 @@ public class StartUpScreenController implements Initializable {
 //                SubmissionTime.setText(formatter.format(now));
 
                     //or this
-//                Path file = Paths.get(newPostName);
-//                BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
-//
-//                String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
-//                        .withZone(ZoneId.systemDefault())
-//                        .format(Instant.now());
-//                System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
-//                SubmissionTime.setText(s);
-//                SubmissionTime.setVisible(false);
+                Path file = Paths.get(newPostName);
+                BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
+
+                String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
+                        .withZone(ZoneId.systemDefault())
+                        .format(Instant.now());
+                System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
+                st.setText(s);
+                st.setVisible(true);
 
                 }
                 catch (RuntimeException | IOException e)

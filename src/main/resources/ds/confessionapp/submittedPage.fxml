@@ -24,6 +24,6 @@
             <Font name="PP Pangram Sans Light" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="SubmissionTime" layoutX="361.0" layoutY="240.0" prefHeight="17.0" prefWidth="196.0" text="date" textFill="#2e35ff" />
+      <Label fx:id="st" layoutX="361.0" layoutY="240.0" prefHeight="17.0" prefWidth="196.0" text="date" textFill="#2e35ff" />
    </children>
 </AnchorPane>

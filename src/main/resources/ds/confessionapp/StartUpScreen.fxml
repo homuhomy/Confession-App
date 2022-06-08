@@ -57,8 +57,7 @@
                   <Image url="@images/students_main.png" />
                </image>
             </ImageView>
-            <Button fx:id="admin" layoutX="671.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Admin" />
-            <Button fx:id="search" layoutX="671.0" layoutY="70.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Search" />
+            <Button fx:id="admin" layoutX="671.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchScenes" text="Admin" />
          </children>
       </AnchorPane>
    </center>
