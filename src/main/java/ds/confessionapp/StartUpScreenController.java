@@ -3,6 +3,7 @@ package ds.confessionapp;
 import ds.confessionapp.adminPanel.DatabaseSaveData;
 import ds.confessionapp.adminPanel.Queue;
 import ds.confessionapp.adminPanel.SpamCheck;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,15 +25,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import static ds.confessionapp.adminPanel.SpamCheck.getLatestFileName;
 
 class Helper extends TimerTask{
 
@@ -49,12 +47,16 @@ public class StartUpScreenController implements Initializable {
     SpamCheck s = new SpamCheck();
     @FXML
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit;
+    @FXML
     public TextField input, pswdinput, confessID;
-    public TextArea confession;
-    public Label XsuccessLabel, confessions, SubmissionTime;
+    @FXML
+    public TextArea confession, displayTime;
+    @FXML
+    public Label XsuccessLabel, confessions, SubmissionTime, warningSubmit;
 
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
+
     public static void QueueList(){
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
@@ -114,6 +116,7 @@ public class StartUpScreenController implements Initializable {
 //        TimerTask task = new Helper();
 //
 //        timer.schedule(task, 200,5000);
+
         WaitingList();
     }
 
@@ -124,15 +127,13 @@ public class StartUpScreenController implements Initializable {
 
         if(event.getSource()== submitButton){
             stage = (Stage) submitButton.getScene().getWindow();
-             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
-
+            root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("ViewConfessionPage.fxml"));
 
         }
-
         else if(event.getSource()==backForsubmitpage){
             stage = (Stage) backForsubmitpage.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
@@ -177,53 +178,55 @@ public class StartUpScreenController implements Initializable {
 
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
+
             //submit new pst to tempFiles folder
-            String replyId = confessID.getText();
+            String data=confession.getText().trim(); //read contents of text area into 'data'
+                String replyId = confessID.getText();
+                String content;
+                if(confessID.getText().isEmpty()){
+                    content = confession.getText();
+                }else{
+                    content = "Replying to " + replyId + "\n\n" + confession.getText();
+                }
 
-            String content;
-            if(confessID.getText().isEmpty()){
-                content = confession.getText();
-            }else{
-                content = "Replying to " + replyId + "\n\n" + confession.getText();
-            }
+                File f= new File("tempFiles");
+                File[] listOfFiles = f.listFiles();
 
-            File f= new File("tempFiles");
-            File[] listOfFiles = f.listFiles();
+                int number = 1;
+                if(listOfFiles.length > 0){ //if there's already existing files in tempFiles
+                    String newName = getLatestFileNameTF().substring(7,8);
+                    number = Integer.parseInt(newName) + 1;
+                }
+                String newPostName = "tempFiles/newPost" + number + ".txt";
+                BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
+                try {
+                    toNewTxtFile.write(content);
 
-            int number = 1;
-            if(listOfFiles.length > 0){ //if there's already existing files in tempFiles
-                String newName = getLatestFileNameTF().substring(7,8);
-                number = Integer.parseInt(newName) + 1;
-            }
-            String newPostName = "tempFiles/newPost" + number + ".txt";
-            BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
-            try {
-                toNewTxtFile.write(content);
+                    //either this one
+//                LocalDateTime now = LocalDateTime.now();
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm");
+//                SubmissionTime.setText(formatter.format(now));
 
-            }
-            catch (RuntimeException | IOException e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                toNewTxtFile.close();
-            }
-
-            //from here
-//            Path file = Paths.get(newPostName);
-//            BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
+                    //or this
+//                Path file = Paths.get(newPostName);
+//                BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
 //
-//            String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
-//                            .withZone(ZoneId.systemDefault())
-//                            .format(Instant.now());
-//            System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
-//            SubmissionTime.setText(s);
-            //to here
+//                String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
+//                        .withZone(ZoneId.systemDefault())
+//                        .format(Instant.now());
+//                System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
+//                SubmissionTime.setText(s);
+//                SubmissionTime.setVisible(false);
 
-            stage = (Stage) submit.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("submittedPage.fxml"));
-
+                }
+                catch (RuntimeException | IOException e)
+                {e.printStackTrace();}
+                finally
+                {
+                    toNewTxtFile.close();
+                }
+                stage = (Stage) submit.getScene().getWindow();
+                root = FXMLLoader.load(getClass().getResource("submittedPage.fxml"));
 
         }
         Scene scene = new Scene(root);
@@ -279,20 +282,6 @@ public class StartUpScreenController implements Initializable {
         confessions.setVisible(true);
         confessions.setText(confess.peek());
     }
-
-//    @FXML
-//    public void viewTime(){
-//        Path file = Paths.get(newPostName);
-//
-//        BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
-//
-//        System.out.println("Creation Time: " + attr.creationTime());
-//
-//        SubmissionTime.setVisible(true);
-//        SubmissionTime.setText("Login Unsuccessful!\nPlease try again");
-//        //ok.setVisible(false);
-//    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -330,5 +319,22 @@ public class StartUpScreenController implements Initializable {
         }
         return chosenFile.getName();
     }
+
+//    @FXML
+//    private  void TimeNow(){
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm");
+//        TextArea textArea = new TextArea(formatter.format(now));
+//    }
+
+//    public void imageHome(){
+//
+//        Defaultview.setPickOnBounds(true); // allows click on transparent areas
+//        Defaultview.setOnMouseClicked((MouseEvent e) -> {
+//            FileChooser fileChooser = new FileChooser();
+//            fileChooser.setTitle("Open Resource File");
+//            fileChooser.showOpenDialog(new Stage());
+//        });
+//    }
 
 }

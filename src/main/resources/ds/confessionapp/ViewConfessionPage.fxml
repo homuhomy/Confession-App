@@ -74,14 +74,16 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="51.0" layoutY="70.0" prefHeight="360.0" prefWidth="410.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
+            <AnchorPane layoutX="51.0" layoutY="95.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="407.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
                <children>
                   <Label fx:id="confessions" layoutX="50.0" layoutY="163.0" onDragDetected="#PostConfessions" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" visible="false" />
-                  <Button fx:id="viewconfessionsbutton" layoutX="116.0" layoutY="159.0" mnemonicParsing="false" onAction="#switchScenes" text="Click Here to View Confessions" />
-                  <TextArea fx:id="postArea" layoutX="14.0" layoutY="6.0" prefHeight="144.0" prefWidth="382.0" />
+                  <Button fx:id="viewconfessionsbutton" layoutX="118.0" layoutY="167.0" mnemonicParsing="false" onAction="#switchScenes" text="Click Here to View Confessions" />
+                  <TextArea fx:id="postArea" layoutX="84.0" layoutY="14.0" prefHeight="144.0" prefWidth="239.0" />
                </children>
             </AnchorPane>
-            <Button fx:id="backForadmin" layoutX="475.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
+            <Button fx:id="backForadmin" layoutX="53.0" layoutY="58.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back to Homepage" textFill="WHITE" />
+            <Button fx:id="backForadmin1" layoutX="632.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Next" textFill="WHITE" />
+            <Button fx:id="backForadmin11" layoutX="560.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Previous" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>
