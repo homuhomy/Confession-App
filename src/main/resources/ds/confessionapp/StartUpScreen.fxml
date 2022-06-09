@@ -51,7 +51,7 @@
                </image>
             </ImageView>
             <Button fx:id="admin" layoutX="671.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Admin" />
-            <Button fx:id="search" layoutX="448.0" layoutY="133.0" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="135.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Search Confession" />
+            <Button fx:id="search" layoutX="448.0" layoutY="133.0" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="135.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Search Confession" textFill="WHITE" />
             <ImageView fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="637.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-system-administrator-male-48.png" />

@@ -77,7 +77,6 @@ public class SearchPageController implements Initializable {
                         if (item != null) {
                             Text text = new Text(item);
                             text.setStyle(  " -fx-text-wrap: true;" +
-//                                    " -fx-padding: 5px 30px 5px 5px;" +
                                     " -fx-text-alignment:left;");
                             text.setWrappingWidth(col.getPrefWidth() - 35);
                             this.setPrefHeight(text.getLayoutBounds().getHeight() + 10);
@@ -90,8 +89,25 @@ public class SearchPageController implements Initializable {
 
             ReplyIdColumn.setCellValueFactory(new PropertyValueFactory<>("reply_id"));
             DateColumn.setCellValueFactory(new PropertyValueFactory<>("creation_date"));
-
             TableView.setItems(confessionSearchModelObservableList);
+
+            ConfessionIdColumn.setCellFactory (col -> {
+                TableCell<ConfessionSearchModel, String> cell = new TableCell<>() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            Text text = new Text(item);
+                            text.setStyle(  " -fx-text-wrap: true;" +
+                                    " -fx-text-alignment:justify;");
+                            //text.setWrappingWidth(col.getPrefWidth() - 35);
+                            this.setPrefHeight(text.getLayoutBounds().getHeight() + 10);
+                            this.setGraphic(text);
+                        }
+                    }
+                };
+                return cell;
+            });
 
             //initial filtered list
             FilteredList<ConfessionSearchModel> filteredData = new FilteredList<>(confessionSearchModelObservableList, b -> true);
