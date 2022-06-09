@@ -11,12 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -70,6 +68,26 @@ public class SearchPageController implements Initializable {
 
             ConfessionIdColumn.setCellValueFactory(new PropertyValueFactory<>("confession_id"));
             ConfessionColumn.setCellValueFactory(new PropertyValueFactory<>("file_content"));
+
+            ConfessionColumn.setCellFactory (col -> {
+                TableCell<ConfessionSearchModel, String> cell = new TableCell<>() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            Text text = new Text(item);
+                            text.setStyle(  " -fx-text-wrap: true;" +
+//                                    " -fx-padding: 5px 30px 5px 5px;" +
+                                    " -fx-text-alignment:left;");
+                            text.setWrappingWidth(col.getPrefWidth() - 35);
+                            this.setPrefHeight(text.getLayoutBounds().getHeight() + 10);
+                            this.setGraphic(text);
+                        }
+                    }
+                };
+                return cell;
+            });
+
             ReplyIdColumn.setCellValueFactory(new PropertyValueFactory<>("reply_id"));
             DateColumn.setCellValueFactory(new PropertyValueFactory<>("creation_date"));
 
@@ -108,6 +126,9 @@ public class SearchPageController implements Initializable {
             Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    //TableColumn<ConfessionSearchModel, String> ConfessionColumn
+
+
 
     public void switchScenes(ActionEvent event) throws Exception {
         Stage stage = null;
