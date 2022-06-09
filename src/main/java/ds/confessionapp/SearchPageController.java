@@ -67,8 +67,8 @@ public class SearchPageController implements Initializable {
             }
 
             ConfessionIdColumn.setCellValueFactory(new PropertyValueFactory<>("confession_id"));
+            //ConfessionIdColumn.setStyle( "-fx-alignment: CENTER;");
             ConfessionColumn.setCellValueFactory(new PropertyValueFactory<>("file_content"));
-
             ConfessionColumn.setCellFactory (col -> {
                 TableCell<ConfessionSearchModel, String> cell = new TableCell<>() {
                     @Override
@@ -88,26 +88,11 @@ public class SearchPageController implements Initializable {
             });
 
             ReplyIdColumn.setCellValueFactory(new PropertyValueFactory<>("reply_id"));
+            //ReplyIdColumn.setStyle("-fx-alignment: CENTER;");
             DateColumn.setCellValueFactory(new PropertyValueFactory<>("creation_date"));
+            //DateColumn.setStyle("-fx-alignment: CENTER;");
             TableView.setItems(confessionSearchModelObservableList);
-
-            ConfessionIdColumn.setCellFactory (col -> {
-                TableCell<ConfessionSearchModel, String> cell = new TableCell<>() {
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            Text text = new Text(item);
-                            text.setStyle(  " -fx-text-wrap: true;" +
-                                    " -fx-text-alignment:justify;");
-                            //text.setWrappingWidth(col.getPrefWidth() - 35);
-                            this.setPrefHeight(text.getLayoutBounds().getHeight() + 10);
-                            this.setGraphic(text);
-                        }
-                    }
-                };
-                return cell;
-            });
+            //TableView.setSortPolicy();
 
             //initial filtered list
             FilteredList<ConfessionSearchModel> filteredData = new FilteredList<>(confessionSearchModelObservableList, b -> true);

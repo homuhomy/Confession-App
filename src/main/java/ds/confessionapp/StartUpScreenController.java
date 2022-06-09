@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -50,7 +51,8 @@ public class StartUpScreenController implements Initializable {
     //Confession c = new Confession();
     SpamCheck s = new SpamCheck();
     @FXML
-    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search;
+    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search,
+            homeButtonIcon;
     @FXML
     public TextField input, pswdinput, confessID, searchField;
     @FXML
@@ -297,9 +299,10 @@ public class StartUpScreenController implements Initializable {
         confessions.setVisible(true);
         confessions.setText(confess.peek());
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    public void initialize() {
+        ImageView imageView = new ImageView(getClass().getResource("/Users/homuhomy/IdeaProjects/Confession-App/src/main/resources/ds/confessionapp/images/addSubmission.png").toExternalForm());
+        homeButtonIcon.setGraphic(imageView);
     }
 
     public static String getLatestFileNameTF() {
@@ -333,6 +336,11 @@ public class StartUpScreenController implements Initializable {
             chosenFile = f;
         }
         return chosenFile.getName();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 
 //    @FXML
