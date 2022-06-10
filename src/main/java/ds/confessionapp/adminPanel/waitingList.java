@@ -4,13 +4,15 @@ import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
 import java.util.Scanner;
+import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class waitingList {
+public class waitingList extends TimerTask{
     static Queue<String> confess = new Queue<>();
+    static Queue<String> ID = new Queue<>();
     public static void QueueList(){
 
         //queues everything in the Queue
@@ -21,7 +23,7 @@ public class waitingList {
 
 
             while (resultSet.next()) {
-                confess.enqueue(resultSet.getString("confession_id"));
+                ID.enqueue(resultSet.getString("confession_id"));
                 confess.enqueue(resultSet.getString("file_content"));
 
             }
@@ -40,25 +42,27 @@ public class waitingList {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             QueueList();
-            Runnable task1 = () -> confess.dequeue(); //pop data meaning show in public post
 
-            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    confess.dequeue();
+                }
+            };
+            while(!resultSet.next()){
 
-            while(resultSet.next()){
-                System.out.println(resultSet.getInt("count(file_content)"));
                 if(resultSet.getInt("count(file_content)")<=5){
-                    executorService.schedule(task1, 1, TimeUnit.SECONDS);
-//                    executorService.shutdown();
+                    timer.scheduleAtFixedRate(task,10, 10);
+
                 }
                 else if(resultSet.getInt("count(file_content)")<=10){
-                    executorService.schedule(task1, 10, TimeUnit.SECONDS);
-                    executorService.shutdown();
+                    timer.scheduleAtFixedRate(task,20, 20);
+
                 }
                 else {
-                    executorService.schedule(task1, 5, TimeUnit.SECONDS);
-                    executorService.shutdown();
+                    timer.schedule(task,0,15);
                 }
-
             }
 
         } catch (SQLException e) {
@@ -73,12 +77,26 @@ public class waitingList {
     }
 
     public static void main(String[] args) {
-        WaitingList();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter an int: ");
-        int num = sc.nextInt();
-        batchRemoval(num);
-        System.out.println(confess.toString());
+//        WaitingList();
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Enter an int: ");
+//        int num = sc.nextInt();
+//        batchRemoval(num);
+//        System.out.println(confess.toString());
+//        Timer timer = new Timer();
+//        TimerTask task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                confess.dequeue();
+//            }
+//        };
+//
+//        timer.schedule(task, 200,5000);
+
     }
 
+    @Override
+    public void run() {
+
+    }
 }

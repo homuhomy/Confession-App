@@ -3,6 +3,7 @@ package ds.confessionapp;
 import ds.confessionapp.adminPanel.DatabaseSaveData;
 import ds.confessionapp.adminPanel.Queue;
 import ds.confessionapp.adminPanel.SpamCheck;
+import ds.confessionapp.adminPanel.waitingList;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -115,12 +117,12 @@ public class StartUpScreenController implements Initializable {
 
     DatabaseSaveData d = new DatabaseSaveData();
     public static void main(String[] args) {
-//        Timer timer = new Timer();
-//        TimerTask task = new Helper();
-//
-//        timer.schedule(task, 200,5000);
+        Timer timer = new Timer();
+        TimerTask task = new waitingList();
 
-        WaitingList();
+        timer.schedule(task, 200,5000);
+
+//        WaitingList();
     }
 
     public void switchScenes(ActionEvent event) throws Exception {
@@ -183,52 +185,8 @@ public class StartUpScreenController implements Initializable {
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
 
-            //submit new pst to tempFiles folder
-            String data=confession.getText().trim(); //read contents of text area into 'data'
-                String replyId = confessID.getText();
-                String content;
-                if(confessID.getText().isEmpty()){
-                    content = confession.getText();
-                }else{
-                    content = "Replying to " + replyId + "\n\n" + confession.getText();
-                }
+            showtime();
 
-                File f= new File("tempFiles");
-                File[] listOfFiles = f.listFiles();
-
-                int number = 1;
-                if(listOfFiles.length > 0){ //if there's already existing files in tempFiles
-                    String newName = getLatestFileNameTF().substring(7,8);
-                    number = Integer.parseInt(newName) + 1;
-                }
-                String newPostName = "tempFiles/newPost" + number + ".txt";
-                BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
-                try {
-                    toNewTxtFile.write(content);
-
-                    //either this one
-//                LocalDateTime now = LocalDateTime.now();
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm");
-//                SubmissionTime.setText(formatter.format(now));
-
-                    //or this
-                Path file = Paths.get(newPostName);
-                BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
-
-                String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
-                        .withZone(ZoneId.systemDefault())
-                        .format(Instant.now());
-                System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
-                st.setText(s);
-                st.setVisible(true);
-
-                }
-                catch (RuntimeException | IOException e)
-                {e.printStackTrace();}
-                finally
-                {
-                    toNewTxtFile.close();
-                }
                 stage = (Stage) submit.getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("submittedPage.fxml"));
 
@@ -237,6 +195,55 @@ public class StartUpScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+
+    public void showtime() throws IOException {
+        //submit new pst to tempFiles folder
+        String data=confession.getText().trim(); //read contents of text area into 'data'
+        String replyId = confessID.getText();
+        String content;
+        if(confessID.getText().isEmpty()){
+            content = confession.getText();
+        }else{
+            content = "Replying to " + replyId + "\n\n" + confession.getText();
+        }
+
+        File f= new File("tempFiles");
+        File[] listOfFiles = f.listFiles();
+
+        int number = 1;
+        if(listOfFiles.length > 0){ //if there's already existing files in tempFiles
+            String newName = getLatestFileNameTF().substring(7,8);
+            number = Integer.parseInt(newName) + 1;
+        }
+        String newPostName = "tempFiles/newPost" + number + ".txt";
+        BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
+        try {
+            toNewTxtFile.write(content);
+
+            //either this one
+//                LocalDateTime now = LocalDateTime.now();
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm");
+//                st.setText(formatter.format(now));
+
+            //or this
+            Path file = Paths.get(newPostName);
+            BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
+
+            String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
+                    .withZone(ZoneId.systemDefault())
+                    .format(Instant.now());
+            System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
+            st.setVisible(true);
+            st.setText(s);
+
+        }catch (RuntimeException | IOException e)
+            {e.printStackTrace();}
+                finally
+            {
+                toNewTxtFile.close();
+            }
+        }
 
     public void Success(){
         XsuccessLabel.setVisible(true);
@@ -286,9 +293,10 @@ public class StartUpScreenController implements Initializable {
         confessions.setVisible(true);
         confessions.setText(confess.peek());
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        WaitingList();
     }
 
     public static String getLatestFileNameTF() {
