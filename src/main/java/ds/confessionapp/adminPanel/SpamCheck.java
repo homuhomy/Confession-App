@@ -87,11 +87,11 @@ public class SpamCheck {
         return ((vectAB) / (Math.sqrt(vectA) * Math.sqrt(vectB)));
     }
 
-    public static void spam(String post) throws IOException {
+    public static void main(String[] args) throws IOException {
         SpamCheck cs = new SpamCheck();
 
-        Path newConfessionPostPath = Path.of("tempFiles/newPosts.txt");
-        String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(post));
+        Path newConfessionPostPath = Path.of("tempFiles/newPost1.txt");
+        String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(" "));
 
         String comparedFile = "";
 
@@ -103,33 +103,33 @@ public class SpamCheck {
         String contents[] = directoryPath.list();
         //make it so that once it have been deleted it will get out of for loop
         for (int i = 0; i < contents.length; i++) {
-                System.out.println(contents[i]);
+            System.out.println(contents[i]);
 
-                comparedFile = Files.readAllLines(Paths.get("InputFiles/" + contents[i])).stream().collect(Collectors.joining(" "));
+            comparedFile = Files.readAllLines(Paths.get("InputFiles/" + contents[i])).stream().collect(Collectors.joining(" "));
 
-                score = cs.score(newConfessionPost, comparedFile);
-                System.out.println("Cosine similarity score = " + score);
+            score = cs.score(newConfessionPost, comparedFile);
+            System.out.println("Cosine similarity score = " + score);
 
-                if (score > 0.90) {
-                    //delete file
-                    System.out.println("Deleting the file");
-                    File file = new File("tempFiles/newPost.txt.txt");
-                    file.delete();
+            if (score > 0.90) {
+                //delete file
+                System.out.println("Deleting the file");
+                File file = new File("tempFiles/newPost.txt");
+                file.delete();
 
-                    System.out.println("----------------------------------------");
-                    System.out.println("File have been removed successfully");
-                    System.out.println("----------------------------------------");
+                System.out.println("----------------------------------------");
+                System.out.println("File have been removed successfully");
+                System.out.println("----------------------------------------");
 
-                    break;
+                break;
 
-                } else if(i == contents.length - 1){
-                    System.out.println("File will be moved");
+            } else if(i == contents.length - 1){
+                System.out.println("File will be moved");
 
-                    //loop through the files in InputFiles and get the LATEST file name
-                    //substring the latest file / or get index of the latestFinalName
-                    // eg: #UM0004.txt
-                    String latestFileName = getLatestFileName().substring(3, 7);
-                    int number = Integer.parseInt(latestFileName) + 1; //increase number for the new file
+                //loop through the files in InputFiles and get the LATEST file name
+                //substring the latest file / or get index of the latestFinalName
+                // eg: #UM0004.txt
+                String latestFileName = getLatestFileName().substring(3, 7);
+                int number = Integer.parseInt(latestFileName) + 1; //increase number for the new file
 
             /*  % denotes that it's a formatting instruction
                     0 is a flag that says pad with zero
@@ -138,25 +138,25 @@ public class SpamCheck {
                     d is for decimal which means the next argument should be an
                     integral value e.g. byte, char, short, int, or long. */
 
-                    String str = String.format("%04d", number);  // 000x //x is number
-                    String newPostNewName = "#UM" + str + ".txt";
+                String str = String.format("%04d", number);  // 000x //x is nummber
+                String newPostNewName = "#UM" + str + ".txt";
 
-                    String newPath = "InputFiles/" + newPostNewName;
+                String newPath = "InputFiles/" + newPostNewName;
 
-                    Path temp = Files.move(newConfessionPostPath, Paths.get(newPath));
+                Path temp = Files.move(newConfessionPostPath, Paths.get(newPath));
 
-                    System.out.println("------------------------------------------------");
-                    System.out.println("File have been moved and renamed successfully");
-                    System.out.println("------------------------------------------------");
+                System.out.println("------------------------------------------------");
+                System.out.println("File have been moved and renamed successfully");
+                System.out.println("------------------------------------------------");
 
-                    break;
-                }
-                else{
-                    continue;
-                }
-
+                break;
             }
+            else{
+                continue;
+            }
+
         }
+    }
 
 
     public static String getLatestFileName() {
