@@ -11,7 +11,6 @@ public class SpamCheck {
 
     //using Consine Similarity
     private static class Values {
-
         private int val1, val2;
 
         private Values(int v1, int v2) {
@@ -87,22 +86,35 @@ public class SpamCheck {
         return ((vectAB) / (Math.sqrt(vectA) * Math.sqrt(vectB)));
     }
 
+
     public static void main(String[] args) throws IOException {
         SpamCheck cs = new SpamCheck();
 
-        Path newConfessionPostPath = Path.of("tempFiles/newPost.txt");
-        String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(" "));
+        //make a queue so that the list will have the name of the text files from a directory
+        Queue<String> tempFilesQueue = new Queue<>();
+        File directory = new File("tempFiles");
+        for(File f:directory.listFiles()){
+            tempFilesQueue.enqueue(f.getName());
+        }
+        System.out.println(tempFilesQueue);
 
-        String comparedFile = "";
+        while(tempFilesQueue.getSize() != 0){
+            Path newConfessionPostPath = Path.of("tempFiles/" + tempFilesQueue.peek());
+            System.out.println("----------------------------------------");
+            System.out.println("Now checking " + tempFilesQueue.peek());
+            System.out.println("----------------------------------------");
+            String newConfessionPost = Files.readAllLines(newConfessionPostPath).stream().collect(Collectors.joining(" "));
 
-        //loop this
-        double score = 0;
+            String comparedFile = "";
 
-        File directoryPath = new File("InputFiles");
-        //List of all files and directories
-        String contents[] = directoryPath.list();
-        //make it so that once it have been deleted it will get out of for loop
-        for (int i = 0; i < contents.length; i++) {
+            //loop this
+            double score = 0;
+
+            File directoryPath = new File("InputFiles");
+            //List of all files and directories
+            String contents[] = directoryPath.list();
+            //make it so that once it have been deleted it will get out of for loop
+            for (int i = 0; i < contents.length; i++) {
                 System.out.println(contents[i]);
 
                 comparedFile = Files.readAllLines(Paths.get("InputFiles/" + contents[i])).stream().collect(Collectors.joining(" "));
@@ -154,10 +166,11 @@ public class SpamCheck {
                 else{
                     continue;
                 }
-
             }
+            tempFilesQueue.dequeue();
         }
-
+        System.out.println("All files in tempFiles have been filtered.");
+    }
 
     public static String getLatestFileName() {
         File directory = new File("InputFiles");
@@ -170,7 +183,6 @@ public class SpamCheck {
                 int n2 = extractNumber(o2.getName());
                 return n1 - n2;
             }
-
             private int extractNumber(String name) {
                 int i = 0;
                 try {

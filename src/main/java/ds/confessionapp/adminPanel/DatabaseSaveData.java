@@ -8,19 +8,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/* WHAT TO FIX
-*  make it so that files that already in DB no need to save again in the database
-* */
-class DatabaseSaveData {
+public class DatabaseSaveData {
 
     public static void main(String[] args) throws SQLException {
+
+        //only run this IF there's a new file detected in the InputFiles directory
 
         //insert value to the table //? represent placeholder
         //add date creation for when the confession is made
@@ -31,7 +28,7 @@ class DatabaseSaveData {
         //uses this path object to get a FileInputStream object which is used as an input stream for reading data from files on disk
         //This method returns null if there was no file found or if there was an error opening it
         try (Stream<Path> list = Files.list(dir);
-             Connection connection = DatabaseCheck.getConnection();
+             Connection connection = DatabaseConnection.getConnection();
              PreparedStatement ps = connection.prepareStatement(SQL)) {
             List<Path> pathList = list.collect(Collectors.toList());
             System.out.println("Following files are saved in database:");
@@ -73,7 +70,7 @@ class DatabaseSaveData {
             for (int i : executeBatch) {
                 System.out.println(i);
             }
-        } catch (IOException e) {
+        } catch (BatchUpdateException | SQLIntegrityConstraintViolationException | IOException e) {
             e.printStackTrace();
         }
 

@@ -11,7 +11,7 @@ public class DatabaseLoadData {
 
         String SQL="SELECT *FROM storeConfession_table";
         //connect to the existing database
-        try(Connection connection = DatabaseCheck.getConnection();
+        try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement ps = connection.prepareStatement(SQL); ResultSet
                     rs = ps.executeQuery()) {
 

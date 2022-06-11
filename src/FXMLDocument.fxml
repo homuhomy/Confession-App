@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="anchopane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXMLDocumentController">
+    <children>
+        <Button layoutX="126" layoutY="90" text="Single FileChooser" onAction="#handleButtonAction" fx:id="Single File Chooser" />
+        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+       <Button onAction="#multiFileChooserAction" layoutX="126" layoutY="90" text="Click Me!"  text="Multiple FileChooser" />
+    </children>
+</AnchorPane>
