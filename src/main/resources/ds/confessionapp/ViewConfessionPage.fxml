@@ -17,21 +17,9 @@
    <left>
       <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="homeIcon" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/search-interface-symbol.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="AddNewConfessionIcon" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/addSubmission.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="homeIcon1" fitHeight="16.0" fitWidth="17.0" layoutX="4.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/icons8-home-48.png" />
-               </image>
-            </ImageView>
+            <Button fx:id="homeButtonIcon" layoutX="5.0" layoutY="184.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
+            <Button fx:id="searchButtonIcon" layoutX="5.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
+            <Button fx:id="submitButtonIcon" layoutX="5.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
          </children>
       </AnchorPane>
    </left>

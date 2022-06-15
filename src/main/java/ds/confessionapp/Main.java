@@ -18,9 +18,9 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    public newMusic music;
+//    public newMusic music;
     public Clip clip;
-    public newMusic stopMusic;
+//    public newMusic stopMusic;
 
     private static Stage stage;
 
@@ -52,7 +52,7 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         String titleScreenMusic = "LAKEY INSPIRED - Better Days.wav";
-        newMusic.playMusic(titleScreenMusic);
+//        newMusic.playMusic(titleScreenMusic);
         launch();
 
     }
