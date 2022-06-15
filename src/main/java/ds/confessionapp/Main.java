@@ -10,10 +10,17 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    public newMusic music;
+    public Clip clip;
+    public newMusic stopMusic;
 
     private static Stage stage;
 
@@ -38,9 +45,15 @@ public class Main extends Application {
 
         primaryStage.show();
 
+
+
     }
 
     public static void main(String[] args) {
+
+        String titleScreenMusic = "LAKEY INSPIRED - Better Days.wav";
+        newMusic.playMusic(titleScreenMusic);
         launch();
+
     }
 }
