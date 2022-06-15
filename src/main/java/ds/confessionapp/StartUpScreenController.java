@@ -36,15 +36,6 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-class Helper extends TimerTask{
-
-    @Override
-    public void run() {
-        System.out.println("works");
-    }
-}
-
-
 
 public class StartUpScreenController implements Initializable {
 
@@ -125,7 +116,7 @@ public class StartUpScreenController implements Initializable {
 //
 //        timer.schedule(task, 200,5000);
 
-        WaitingList();
+
     }
 
     public void switchScenes(ActionEvent event) throws Exception {

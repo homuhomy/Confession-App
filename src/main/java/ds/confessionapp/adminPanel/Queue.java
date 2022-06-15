@@ -23,6 +23,9 @@ public class Queue<E> {
         return e;
     }
 
+    public void removeFirs(){
+        list.removeFirst();
+    }
     public E getElement(int i){
         E element = list.get(i); //get the i-th element but don't remove it
         return element;
@@ -58,6 +61,9 @@ public class Queue<E> {
         return elements;
     }
 
+    public void clear(){
+        list.clear();
+    }
     @Override
     public String toString() {
         return "Queue: " + list.toString();
@@ -73,6 +79,7 @@ public class Queue<E> {
 //
 //        }
 //    }
+
 
     public void setElement(int i, E e){
         list.set(i, e);

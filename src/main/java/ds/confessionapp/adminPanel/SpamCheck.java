@@ -11,16 +11,16 @@ public class SpamCheck {
 
     //using Consine Similarity
     private static class Values {
-        private int val1, val2;
+        private int firstValue, secondValue;
 
         private Values(int v1, int v2) {
-            this.val1 = v1;
-            this.val2 = v2;
+            this.firstValue = v1;
+            this.secondValue = v2;
         }
 
         public void updateValues(int v1, int v2) {
-            this.val1 = v1;
-            this.val2 = v2;
+            this.firstValue = v1;
+            this.secondValue = v2;
         }
     }//end of class values
 
@@ -37,8 +37,8 @@ public class SpamCheck {
             if (!word.isEmpty()) {
                 if (wordFreqVector.containsKey(word)) {
                     Values vals1 = wordFreqVector.get(word);
-                    int freq1 = vals1.val1 + 1;
-                    int freq2 = vals1.val2;
+                    int freq1 = vals1.firstValue + 1;
+                    int freq2 = vals1.secondValue;
                     vals1.updateValues(freq1, freq2);
                     wordFreqVector.put(word, vals1);
                 } else {
@@ -55,8 +55,8 @@ public class SpamCheck {
             if (!word.isEmpty()) {
                 if (wordFreqVector.containsKey(word)) {
                     Values vals1 = wordFreqVector.get(word);
-                    int freq1 = vals1.val1;
-                    int freq2 = vals1.val2 + 1;
+                    int freq1 = vals1.firstValue;
+                    int freq2 = vals1.secondValue + 1;
                     vals1.updateValues(freq1, freq2);
                     wordFreqVector.put(word, vals1);
                 } else {
@@ -74,8 +74,8 @@ public class SpamCheck {
 
         for (int i = 0; i < distinctWords.size(); i++) {
             Values vals12 = wordFreqVector.get(distinctWords.get(i));
-            double freq1 = vals12.val1;
-            double freq2 = vals12.val2;
+            double freq1 = vals12.firstValue;
+            double freq2 = vals12.secondValue;
             //System.out.println(distinctWords.get(i) + "#" + freq1 + "#" + freq2);
             vectAB = vectAB + freq1 * freq2;
             vectA = vectA + freq1 * freq1;
