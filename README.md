@@ -7,4 +7,4 @@ Host is the public IP address: 34.124.213.155
 Username: root
 Password: ds2022letsgo
 
-Database name: UMConfession_database
+Database name: UMCP_Database2
