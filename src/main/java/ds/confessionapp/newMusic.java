@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class newMusic {
     static Clip clip;
 
-    //play sound when user finishes submitting confession  --> not used for now
+    //play sound when user finishes submitting confession
     public static void playSound(String soundLocation) {
 
         Scanner s = new Scanner(System.in);

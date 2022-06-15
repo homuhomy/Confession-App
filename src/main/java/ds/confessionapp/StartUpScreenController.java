@@ -46,6 +46,8 @@ public class StartUpScreenController implements Initializable {
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search,
             homeButtonIcon;
     @FXML
+    public Button searchButtonIcon, submitButtonIcon;
+    @FXML
     public TextField input, pswdinput, confessID, searchField;
     @FXML
     public TextArea confession, displayTime;
@@ -134,6 +136,18 @@ public class StartUpScreenController implements Initializable {
             stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
+        //for icons
+        else if (event.getSource()==searchButtonIcon) {
+            stage = (Stage) search.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
+        } else if (event.getSource()==homeButtonIcon) {
+            stage = (Stage) search.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        }else if (event.getSource()==submitButtonIcon) {
+            stage = (Stage) search.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
+        }
+
         else if(event.getSource().equals(KeyCode.ENTER)){
             //stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
