@@ -3,9 +3,7 @@ package ds.confessionapp;
 import ds.confessionapp.adminPanel.DatabaseSaveData;
 import ds.confessionapp.adminPanel.Queue;
 import ds.confessionapp.adminPanel.SpamCheck;
-import ds.confessionapp.adminPanel.waitingList;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -35,16 +35,12 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.Date;
 
 
 public class StartUpScreenController implements Initializable {
 
     //Confession c = new Confession();
     SpamCheck s = new SpamCheck();
-    waitingList list = new waitingList();
-    TableView<ConfessionSearchModel> table = new TableView<>();
-
     @FXML
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search,
             homeButtonIcon;
@@ -60,8 +56,6 @@ public class StartUpScreenController implements Initializable {
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
 
-
-    static Queue<String> date = new Queue<>();
     public static void QueueList(){
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
@@ -72,7 +66,7 @@ public class StartUpScreenController implements Initializable {
             while (resultSet.next()) {
                 ID.enqueue(resultSet.getString("confession_id"));
                 confess.enqueue(resultSet.getString("file_content"));
-                date.enqueue(resultSet.getString("creation_date"));
+
             }
 //            System.out.println(confess.toString());
         } catch (SQLException e) {
@@ -115,6 +109,7 @@ public class StartUpScreenController implements Initializable {
         }
     }
 
+    DatabaseSaveData d = new DatabaseSaveData();
     public static void main(String[] args) {
 //        Timer timer = new Timer();
 //        TimerTask task = new Helper();
@@ -145,7 +140,6 @@ public class StartUpScreenController implements Initializable {
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("ViewConfessionPage.fxml"));
-
 
         }
         else if(event.getSource()==backForsubmitpage){
@@ -185,13 +179,10 @@ public class StartUpScreenController implements Initializable {
         }
 
         else if(event.getSource()==viewconfessionsbutton){
-//            viewconfessionsbutton.setVisible(false);
-//            confessions.setVisible(true);
-//            confessions.setText(confess.toString()); //when button is clicked, the confessions can be viewed
-
-                confessions.setVisible(true);
-
-            }
+            viewconfessionsbutton.setVisible(false);
+            confessions.setVisible(true);
+            confessions.setText(confess.toString()); //when button is clicked, the confessions can be viewed
+        }
 
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
@@ -295,49 +286,9 @@ public class StartUpScreenController implements Initializable {
         return found;
     }
 
-    public void PostConfessions(ActionEvent event) {
-        event.getEventType();
-        while (!confess.isEmpty()) {
-            int i = 1;
-            Date date = new Date();
-            Date curr = new Date();
-
-            if (confess.getSize() <= 5) {
-                //change the numbers to minutes
-                while (!(curr.getTime() - date.getTime() > 1000 * 10 && curr.getTime() - date.getTime() <= 20 * 1000)) {
-                    curr = new Date();
-
-                }
-                System.out.println(curr);
-                System.out.println("1 " + confess.dequeue());
-                confessions.setText(confess.dequeue());
-            }
-
-            else if (confess.getSize() <= 10) {
-                //change the numbers to minutes
-                while (!(curr.getTime() - date.getTime() > 1000 * 10 && curr.getTime() - date.getTime() <= 20 * 1000)) {
-                    curr = new Date();
-
-                }
-                System.out.println(curr);
-                System.out.println("2 " + confess.dequeue());
-                confessions.setText(confess.dequeue());
-            }
-
-            else {
-                while (!(curr.getTime() - date.getTime() > 1000 * 10 && curr.getTime() - date.getTime() <= 20 * 1000)) {
-                    curr = new Date();
-
-                }
-                System.out.println(curr);
-                System.out.println("3 " + confess.dequeue());
-                confessions.setText(confess.dequeue());
-            }
-
-            confessions.setVisible(true);
-
-        }
-
+    public void PostConfessions(ActionEvent event){
+        confessions.setVisible(true);
+        confessions.setText(confess.peek());
     }
 
     public void initialize() {
@@ -399,7 +350,5 @@ public class StartUpScreenController implements Initializable {
 //            fileChooser.showOpenDialog(new Stage());
 //        });
 //    }
-
-
 
 }

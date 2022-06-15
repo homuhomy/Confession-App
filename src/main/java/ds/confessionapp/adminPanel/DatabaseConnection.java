@@ -12,7 +12,7 @@ public class DatabaseConnection {
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "ds2022letsgo";
     private static final String DB_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://34.124.213.155:3306/UMConfession_database";
+    private static final String DB_URL = "jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2";
 
 
     private static Connection connection = null;

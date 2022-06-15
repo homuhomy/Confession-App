@@ -165,3 +165,28 @@
 //}
 //
 //
+
+/*
+if user clicks submit button
+JButton submitButton = new Jbutton("Submit");
+JTextField confession = new JTextField();
+
+///
+
+if confession post is not null
+        {
+           Spam check
+           }
+           if (spam check successful)
+           System.out.println("You have successfully submitted a confession.\n%s\nPlease wait for a while for your confession etc.", creation_date);
+           else
+           System.out.println("Your confession is invalid. Do check again or submit again for reconfirmation.");
+         }
+
+if user clicks view confessions button
+display confessionsearch model
+
+
+if user clicks adminPanel button
+
+ */
