@@ -1,5 +1,7 @@
 package ds.confessionapp.adminPanel;
 
+import ds.confessionapp.GUI.ViewTable;
+
 import java.util.LinkedList;
 
 public class Queue<E> {
