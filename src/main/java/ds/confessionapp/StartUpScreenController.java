@@ -43,10 +43,9 @@ public class StartUpScreenController implements Initializable {
     //Confession c = new Confession();
     SpamCheck s = new SpamCheck();
     @FXML
-    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search,
-            homeButtonIcon;
+    public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search;
     @FXML
-    public Button searchButtonIcon, submitButtonIcon;
+    public Button homeButtonIcon, searchButtonIcon, submitButtonIcon;
     @FXML
     public TextField input, pswdinput, confessID, searchField;
     @FXML
@@ -206,7 +205,6 @@ public class StartUpScreenController implements Initializable {
 
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
-
             //submit new pst to tempFiles folder
                 String data=confession.getText().trim(); //read contents of text area into 'data'
                 String replyId = confessID.getText();

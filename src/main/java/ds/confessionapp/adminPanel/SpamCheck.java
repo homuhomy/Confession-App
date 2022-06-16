@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -87,7 +88,7 @@ public class SpamCheck {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         SpamCheck cs = new SpamCheck();
 
         //make a queue so that the list will have the name of the text files from a directory
@@ -170,6 +171,8 @@ public class SpamCheck {
             tempFilesQueue.dequeue();
         }
         System.out.println("All files in tempFiles have been filtered.");
+        System.out.println("Adding new files to database...");
+        DatabaseSaveData.main(args);
     }
 
     public static String getLatestFileName() {
