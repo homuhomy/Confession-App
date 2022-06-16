@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 public class DatabaseSaveData {
 
     public static void main(String[] args) throws SQLException {
-
         //only run this IF there's a new file detected in the InputFiles directory
+        //run after SpamCheck
 
         //insert value to the table //? represent placeholder
         //add date creation for when the confession is made
@@ -45,7 +45,7 @@ public class DatabaseSaveData {
                     BufferedReader reader = new BufferedReader(new FileReader(file));
                     // Get and process first line:
                     reply_id = "";
-                    String line = reader.readLine(); //Get the first line. You could consider reader as a queue (sort-of), where readLine() dequeues the first element in the reader queue.
+                    String line = reader.readLine(); //Get the first line. could consider reader as a queue (sort-of), where readLine() dequeues the first element in the reader queue.
                     if (line.startsWith("Replying")) {
                         reply_id = line.substring(12);//Create String of that line and substring starting from #.
                     }
@@ -57,9 +57,8 @@ public class DatabaseSaveData {
                 BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
 
                 ps.setString(1, confession_id.substring(0,7));
-                ps.setCharacterStream(2, new FileReader(file)); //get the file into column
+                ps.setCharacterStream(2, new FileReader(file)); //get the file content into column
                 ps.setString(3, reply_id);  //later change
-
                 String dateCreation = String.valueOf(attr.creationTime());
                 ps.setString(4, dateCreation.substring(0,10));
 
@@ -73,7 +72,5 @@ public class DatabaseSaveData {
         } catch (BatchUpdateException | SQLIntegrityConstraintViolationException | IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }

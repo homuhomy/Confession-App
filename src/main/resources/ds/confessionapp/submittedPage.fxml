@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onInputMethodTextChanged="#switchScenes" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
+<AnchorPane onInputMethodTextChanged="#switchScenes" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.submittedPageController">
    <children>
       <Label layoutX="209.0" layoutY="174.0" text="Your confession has been submitted!">
          <font>
@@ -25,5 +25,10 @@
          </font>
       </Label>
       <Label fx:id="st" layoutX="361.0" layoutY="240.0" onInputMethodTextChanged="#switchScenes" prefHeight="17.0" prefWidth="196.0" text="date" textFill="#2e35ff" />
+      <Button layoutX="77.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="previous-button-icon" stylesheets="@Stylesheet.css" text="Button" />
+      <Button layoutX="116.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="pause-button-icon" stylesheets="@Stylesheet.css" text="Button" />
+      <Button layoutX="155.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="play-button-icon" stylesheets="@Stylesheet.css" text="Button" />
+      <Button layoutX="197.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="next-button-icon" stylesheets="@Stylesheet.css" text="Button" />
+      <Button layoutX="233.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="shuffle-button-icon" stylesheets="@Stylesheet.css" text="Button" />
    </children>
 </AnchorPane>

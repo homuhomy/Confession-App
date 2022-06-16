@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -87,7 +88,7 @@ public class SpamCheck {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         SpamCheck cs = new SpamCheck();
 
         //make a queue so that the list will have the name of the text files from a directory
@@ -116,7 +117,6 @@ public class SpamCheck {
             //make it so that once it have been deleted it will get out of for loop
             for (int i = 0; i < contents.length; i++) {
                 System.out.println(contents[i]);
-
                 comparedFile = Files.readAllLines(Paths.get("InputFiles/" + contents[i])).stream().collect(Collectors.joining(" "));
 
                 score = cs.score(newConfessionPost, comparedFile);
@@ -125,7 +125,8 @@ public class SpamCheck {
                 if (score > 0.90) {
                     //delete file
                     System.out.println("Deleting the file");
-                    File file = new File("tempFiles/newPost.txt");
+                    //get current file name and delete them
+                    File file = new File("tempFiles/" + tempFilesQueue.peek());
                     file.delete();
 
                     System.out.println("----------------------------------------");
@@ -170,6 +171,8 @@ public class SpamCheck {
             tempFilesQueue.dequeue();
         }
         System.out.println("All files in tempFiles have been filtered.");
+        System.out.println("Adding new files to database...");
+        //DatabaseSaveData.main(args);
     }
 
     public static String getLatestFileName() {

@@ -2,7 +2,6 @@ package ds.confessionapp;
 
 public class ConfessionSearchModel {
     String confession_id, file_content, reply_id,  creation_date;
-
     public ConfessionSearchModel(String confession_id, String file_content, String reply_id, String creation_date) {
         this.confession_id = confession_id;
         this.file_content = file_content;

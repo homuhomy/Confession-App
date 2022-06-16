@@ -42,6 +42,8 @@ public class SearchPageController implements Initializable {
     private TextField searchTextField;
     @FXML
     private Button backButton;
+    @FXML
+    private Button homeButtonIcon, submitButtonIcon;
 
     ObservableList<ConfessionSearchModel> confessionSearchModelObservableList = FXCollections.observableArrayList();
 
@@ -136,9 +138,13 @@ public class SearchPageController implements Initializable {
         Parent root = null;
 //        System.out.println(event.getSource());
 
-        if (event.getSource() == backButton) {
+        if (event.getSource() == backButton || event.getSource()==homeButtonIcon) {
             stage = (Stage) backButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        }
+        else if (event.getSource()==submitButtonIcon) {
+            stage = (Stage) submitButtonIcon.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);

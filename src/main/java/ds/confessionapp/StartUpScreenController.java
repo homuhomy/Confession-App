@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
 
+import javax.sound.sampled.Clip;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
@@ -45,6 +46,8 @@ public class StartUpScreenController implements Initializable {
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search,
             homeButtonIcon;
     @FXML
+    public Button searchButtonIcon, submitButtonIcon;
+    @FXML
     public TextField input, pswdinput, confessID, searchField;
     @FXML
     public TextArea confession, displayTime;
@@ -56,9 +59,10 @@ public class StartUpScreenController implements Initializable {
     static Queue<String> confess = new Queue<>();
     static Queue<String> ID = new Queue<>();
 
+
     public static void QueueList(){
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content FROM storeConfession_table ");
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -74,6 +78,40 @@ public class StartUpScreenController implements Initializable {
         }
 
     }
+    public static void WaitingList() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(file_content) FROM storeConfession_table ");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            QueueList();
+
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    confess.dequeue();
+                }
+            };
+            while(!resultSet.next()){
+
+                if(resultSet.getInt("count(file_content)")<=5){
+                    timer.scheduleAtFixedRate(task,10, 10);
+
+                }
+                else if(resultSet.getInt("count(file_content)")<=10){
+                    timer.scheduleAtFixedRate(task,20, 20);
+
+                }
+                else {
+                    timer.schedule(task,0,15);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     DatabaseSaveData d = new DatabaseSaveData();
     public static void main(String[] args) {
@@ -86,15 +124,30 @@ public class StartUpScreenController implements Initializable {
     }
 
     public void switchScenes(ActionEvent event) throws Exception {
+
         Stage stage = null;
         Parent root = null;
 //        System.out.println(event.getSource());
+
+
 
         if(event.getSource()== submitButton){
             //confession.setWrapText(true);
             stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
+        //for icons
+        else if (event.getSource()==searchButtonIcon) {
+            stage = (Stage) search.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
+        } else if (event.getSource()==homeButtonIcon) {
+            stage = (Stage) homeButtonIcon.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        }else if (event.getSource()==submitButtonIcon) {
+            stage = (Stage) search.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
+        }
+
         else if(event.getSource().equals(KeyCode.ENTER)){
             //stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
@@ -150,11 +203,12 @@ public class StartUpScreenController implements Initializable {
             confessions.setText(confess.toString()); //when button is clicked, the confessions can be viewed
         }
 
+
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
 
             //submit new pst to tempFiles folder
-            String data=confession.getText().trim(); //read contents of text area into 'data'
+                String data=confession.getText().trim(); //read contents of text area into 'data'
                 String replyId = confessID.getText();
                 String content;
                 if(confessID.getText().isEmpty()){
@@ -175,23 +229,6 @@ public class StartUpScreenController implements Initializable {
                 BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
                 try {
                     toNewTxtFile.write(content);
-
-                    //either this one
-//                LocalDateTime now = LocalDateTime.now();
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm");
-//                SubmissionTime.setText(formatter.format(now));
-
-                    //or this
-                Path file = Paths.get(newPostName);
-                BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class);
-
-                String s = DateTimeFormatter.ofPattern("uuuu-MMM-dd HH:mm:ss", Locale.ENGLISH)
-                        .withZone(ZoneId.systemDefault())
-                        .format(Instant.now());
-                System.out.println("Creation Time: " + s); // yyyy-mm-dd 11:22:32
-                st.setText(s);
-                st.setVisible(true);
-
                 }
                 catch (RuntimeException | IOException e)
                 {e.printStackTrace();}
@@ -201,13 +238,12 @@ public class StartUpScreenController implements Initializable {
                 }
                 stage = (Stage) submit.getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("submittedPage.fxml"));
-
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-
+*/
     public void Success(){
         XsuccessLabel.setVisible(true);
         XsuccessLabel.setText("Login Successful!\nPress 'OK' to continue ");
@@ -299,22 +335,5 @@ public class StartUpScreenController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
-//    @FXML
-//    private  void TimeNow(){
-//        LocalDateTime now = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy hh:mm");
-//        TextArea textArea = new TextArea(formatter.format(now));
-//    }
-
-//    public void imageHome(){
-//
-//        Defaultview.setPickOnBounds(true); // allows click on transparent areas
-//        Defaultview.setOnMouseClicked((MouseEvent e) -> {
-//            FileChooser fileChooser = new FileChooser();
-//            fileChooser.setTitle("Open Resource File");
-//            fileChooser.showOpenDialog(new Stage());
-//        });
-//    }
 
 }
