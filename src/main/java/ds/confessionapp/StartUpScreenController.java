@@ -127,9 +127,6 @@ public class StartUpScreenController implements Initializable {
         Stage stage = null;
         Parent root = null;
 //        System.out.println(event.getSource());
-
-
-
         if(event.getSource()== submitButton){
             //confession.setWrapText(true);
             stage = (Stage) submitButton.getScene().getWindow();
@@ -140,7 +137,7 @@ public class StartUpScreenController implements Initializable {
             stage = (Stage) search.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
         } else if (event.getSource()==homeButtonIcon) {
-            stage = (Stage) search.getScene().getWindow();
+            stage = (Stage) homeButtonIcon.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
         }else if (event.getSource()==submitButtonIcon) {
             stage = (Stage) search.getScene().getWindow();
