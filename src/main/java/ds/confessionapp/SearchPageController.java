@@ -51,11 +51,11 @@ public class SearchPageController implements Initializable {
         Connection connection = DatabaseConnection.getConnection();
         String searchViewQuery = "SELECT confession_id,file_content,reply_id, creation_date FROM storeConfession_table";
 
-        try {
-            Statement statement = DatabaseConnection.getConnection().createStatement();
-            ResultSet queryOutput = statement.executeQuery(searchViewQuery);
+         try {
+                Statement statement = DatabaseConnection.getConnection().createStatement();
+                ResultSet queryOutput = statement.executeQuery(searchViewQuery);
 
-            while (queryOutput.next()) {
+                while(queryOutput.next()) {
 
                 String queryConfessionId = queryOutput.getString("confession_id");
                 String queryFileContent = queryOutput.getString("file_content");

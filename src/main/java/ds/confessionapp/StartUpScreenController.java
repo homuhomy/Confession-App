@@ -58,7 +58,7 @@ public class StartUpScreenController implements Initializable {
 
     public static void QueueList(){
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content FROM storeConfession_table ");
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -73,40 +73,6 @@ public class StartUpScreenController implements Initializable {
             throw new RuntimeException(e);
         }
 
-    }
-    public static void WaitingList() {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(file_content) FROM storeConfession_table ");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            QueueList();
-
-            Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    confess.dequeue();
-                }
-            };
-            while(!resultSet.next()){
-
-                if(resultSet.getInt("count(file_content)")<=5){
-                    timer.scheduleAtFixedRate(task,10, 10);
-
-                }
-                else if(resultSet.getInt("count(file_content)")<=10){
-                    timer.scheduleAtFixedRate(task,20, 20);
-
-                }
-                else {
-                    timer.schedule(task,0,15);
-                }
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     DatabaseSaveData d = new DatabaseSaveData();
