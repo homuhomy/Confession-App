@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.Clip;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,6 +26,8 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static ds.confessionapp.newMusic.clip;
 
 public class SearchPageController implements Initializable {
 
@@ -150,5 +153,14 @@ public class SearchPageController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void stopMusic(){
+        clip.stop();
+    }
+
+    public void continueMusic() {
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }

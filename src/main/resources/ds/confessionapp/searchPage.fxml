@@ -34,5 +34,7 @@
         <Button fx:id="submitButtonIcon" layoutX="5.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
         <Button fx:id="searchButtonIcon" layoutX="5.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
         <Button layoutX="648.0" layoutY="50.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
+      <Button layoutX="34.0" layoutY="396.0" mnemonicParsing="false" onAction="#stopMusic" text="MUTE" />
+      <Button layoutX="26.0" layoutY="433.0" mnemonicParsing="false" onAction="#continueMusic" text="UNMUTE" />
     </children>
 </AnchorPane>

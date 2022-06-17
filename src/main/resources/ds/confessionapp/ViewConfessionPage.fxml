@@ -89,6 +89,8 @@
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
+            <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#stopMusic" text="MUTE" />
+            <Button layoutX="76.0" layoutY="6.0" mnemonicParsing="false" onAction="#continueMusic" text="UNMUTE" />
          </children></AnchorPane>
    </bottom>
    <right>
