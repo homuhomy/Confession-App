@@ -9,10 +9,10 @@ public class DatabaseConnection {
     //private String? confessionID VARCHAR
     //private String? replyConfessionID VARCHAR (if the new post is replying to other confession, else NULL)
 
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "ds2022letsgo";
-    private static final String DB_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2";
+    protected static final String DB_USERNAME = "root";
+    protected static final String DB_PASSWORD = "ds2022letsgo";
+    protected static final String DB_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+    protected static final String DB_URL = "jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2";
 
 
     private static Connection connection = null;
