@@ -31,7 +31,7 @@
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Label layoutX="53.0" layoutY="23.0" text="Let's see what everyone is talking about!">
+            <Label layoutX="65.0" layoutY="20.0" text="Let's see what everyone is talking about!">
                <font>
                   <Font name="PP Pangram Sans Semibold" size="20.0" />
                </font>
@@ -69,9 +69,11 @@
                   <TextArea fx:id="postArea" layoutX="84.0" layoutY="14.0" prefHeight="144.0" prefWidth="239.0" />
                </children>
             </AnchorPane>
-            <Button fx:id="backForadmin" layoutX="53.0" layoutY="58.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back to Homepage" textFill="WHITE" />
+            <Button fx:id="backForadmin" layoutX="65.0" layoutY="57.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back to Homepage" textFill="WHITE" />
             <Button fx:id="backForadmin1" layoutX="632.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Next" textFill="WHITE" />
             <Button fx:id="backForadmin11" layoutX="560.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Previous" textFill="WHITE" />
+            <Button layoutX="-12.0" layoutY="9.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+            <Button layoutX="24.0" layoutY="9.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
          </children>
       </AnchorPane>
    </center>
@@ -83,8 +85,6 @@
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
-            <Button layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#stopMusic" text="MUTE" />
-            <Button layoutX="76.0" layoutY="6.0" mnemonicParsing="false" onAction="#continueMusic" text="UNMUTE" />
          </children></AnchorPane>
    </bottom>
    <right>

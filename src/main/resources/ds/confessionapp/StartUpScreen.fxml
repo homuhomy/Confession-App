@@ -45,8 +45,8 @@
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
-            <Button layoutX="647.0" layoutY="366.0" mnemonicParsing="false" onAction="#stopMusic" text="MUTE" />
-            <Button layoutX="639.0" layoutY="398.0" mnemonicParsing="false" onAction="#continueMusic" text="UNMUTE" />
+            <Button layoutX="-15.0" layoutY="12.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+            <Button layoutX="23.0" layoutY="12.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
          </children>
       </AnchorPane>
    </center>
