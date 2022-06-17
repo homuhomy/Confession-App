@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,7 +26,7 @@ import java.util.TimerTask;
 public class ViewPageController implements Initializable {
     static Queue<String> confess = new Queue<String>();
     static Queue<String> ID = new Queue<String>();
-    static Queue<String> DATE = new Queue<String>();
+    static Queue<Date> DATE = new Queue<>();
 
     static Queue<String> test = new Queue<>();
     @FXML
@@ -44,7 +45,7 @@ public class ViewPageController implements Initializable {
             while (resultSet.next()) {
                 ID.enqueue(resultSet.getString("confession_id"));
                 confess.enqueue(resultSet.getString("file_content"));
-                DATE.enqueue(resultSet.getString("creation_date"));
+                DATE.enqueue(resultSet.getDate("creation_date"));
             }
 
         } catch (SQLException e) {
@@ -62,13 +63,17 @@ public class ViewPageController implements Initializable {
             while (resultSet.next()) {
                 ID.enqueue(resultSet.getString("confession_id"));
                 confess.enqueue(resultSet.getString("file_content"));
-                DATE.enqueue(resultSet.getString("creation_date"));
+                DATE.enqueue(resultSet.getTimestamp("creation_date"));
+
+//                System.out.println(confess.dequeue());
+//                System.out.println(ID.dequeue());
+//                System.out.println(DATE.dequeue());
             }
 //            System.out.println(confess.toString());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(confess.dequeue());
+
     }
 
 
@@ -81,17 +86,18 @@ public class ViewPageController implements Initializable {
     @FXML
     TableColumn <ViewTable, String> IDColumn;
 
-    ViewTable v = new ViewTable("ID","confession","date");
+//    ViewTable v = new ViewTable("ID","confession","date");
     public void View(ActionEvent event){
         if(event.getSource()==view){
-//            table.setItems(confessionList());
+            table.setItems(confessionList());
         }
     }
 
     public void start(ActionEvent event){
 
         if(event.getSource()==update) {
-            table.setItems(List());
+            table.refresh();
+            table.setItems(confessionList());
 //            while(!confess.isEmpty()) {
 //            table.refresh();
 //            int i = 1;
@@ -135,21 +141,41 @@ public class ViewPageController implements Initializable {
 
         if(!confess.isEmpty()){
         while(!confess.isEmpty()){
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("hi");
-                    confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
-
+            Date date = DATE.peek();
+            Date curr = new Date();
+            if (confess.getSize() <= 5) {
+                //change the numbers to minutes
+                while (!(curr.getTime()-date.getTime()>=15*60*1000)) {
+                    curr = new Date();
                 }
-            };
-                timer.scheduleAtFixedRate(task,1000,15*1000);
-                if(test.getSize()<10){break;}
-                return confession;
+                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), (java.sql.Date) DATE.dequeue()));
+                System.out.println(1);
+                table.setItems(confession);
+            }
+
+            else if (confess.getSize() <= 10) {
+                //change the numbers to minutes
+                while (!(curr.getTime()-date.getTime()>=10*60*1000)) {
+                    curr = new Date();
+                }
+                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), (java.sql.Date) DATE.dequeue()));
+                System.out.println(2);
+                table.setItems(confession);
+            }
+
+            else {
+                //change the numbers to minutes
+                while (!(curr.getTime()-date.getTime()>=5*60*1000)) {
+                    curr = new Date();
+                }
+                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), (java.sql.Date) DATE.dequeue()));
+                System.out.println(3);
+                table.setItems(confession);
             }
         }
+        }
         else if(confess.isEmpty()){
-            timer.cancel();
+
             QueueList();
         }
 
@@ -198,88 +224,14 @@ public class ViewPageController implements Initializable {
         return confession;
     }
 
-    public ObservableList<ViewTable> List() {
-
-        ObservableList<ViewTable> list = FXCollections.observableArrayList();
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connection = DatabaseConnection.getConnection();
-        String searchViewQuery = "SELECT confession_id,file_content, creation_date FROM storeConfession_table";
-
-        try {
-            Statement statement = DatabaseConnection.getConnection().createStatement();
-            ResultSet queryOutput = statement.executeQuery(searchViewQuery);
-
-            while (queryOutput.next()) {
-
-                String queryConfessionId = queryOutput.getString("confession_id");
-                String queryFileContent = queryOutput.getString("file_content");
-                String queryCreationDate = queryOutput.getString("creation_date");
-                while(!confess.isEmpty()) {
-//            java.util.Date date = new java.util.Date();
-//            java.util.Date curr = new java.util.Date();
-//                System.out.println("Date: " +date.getTime());
-//                System.out.println(curr.getTime());
-//
-//            if (confess.getSize() <= 5) {
-//                //change the numbers to minutes
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
-//                    curr = new java.util.Date();
-//                }
-//                System.out.println("1 "+curr);
-//                table.setItems(List());
-//
-//            } else if (confess.getSize() <= 10) {
-//                //change the numbers to minutes
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
-//                    curr = new java.util.Date();
-//
-//                }
-//                System.out.println("2 "+curr);
-//                table.setItems(confessionList());
-//
-//            } else {
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
-//                    curr = new Date();
-//
-//                }
-//                System.out.println("3 "+curr);
-//                table.setItems(confessionList());
-//            }
-        }
-                list.add(new ViewTable(queryConfessionId,queryFileContent,queryCreationDate));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    return list;
-    }
-
-        public void timer(){
-        Timer timer = new Timer();
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    count++;
-                    System.out.println("hi");
-                    confessionList();
-                }
-            };
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        confessionColumn = new TableColumn<>("Confession");
         confessionColumn.setMaxWidth(200);
 
-//        dateColumn = new TableColumn<>("Date");
         dateColumn.setMaxWidth(100);
-//        dateColumn.setCellValueFactory(new PropertyValueFactory<>(DATE.dequeue()));
 
-//        IDColumn = new TableColumn<>("ID");
         IDColumn.setMaxWidth(300);
-//        IDColumn.setCellValueFactory(new PropertyValueFactory<>());
-
 
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
@@ -290,7 +242,7 @@ public class ViewPageController implements Initializable {
                 while (resultSet.next()) {
                     ID.enqueue(resultSet.getString("confession_id"));
                     confess.enqueue(resultSet.getString("file_content"));
-                    DATE.enqueue(resultSet.getString("creation_date"));
+                    DATE.enqueue(resultSet.getDate("creation_date"));
                     test.enqueue(" ");
                 }
 //            System.out.println(confess.toString());
@@ -302,7 +254,7 @@ public class ViewPageController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("creation_date"));
         IDColumn.setCellValueFactory(new PropertyValueFactory<>("confession_id"));
 
-
+        confessionList();
     }
 
     public void switchScenes(ActionEvent event) throws Exception {

@@ -172,7 +172,7 @@ public class SpamCheck {
         }
         System.out.println("All files in tempFiles have been filtered.");
         System.out.println("Adding new files to database...");
-        //DatabaseSaveData.main(args);
+        DatabaseSaveData.main(args);
     }
 
     public static String getLatestFileName() {

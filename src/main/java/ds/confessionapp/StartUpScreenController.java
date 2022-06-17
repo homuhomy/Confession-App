@@ -243,7 +243,7 @@ public class StartUpScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-*/
+
     public void Success(){
         XsuccessLabel.setVisible(true);
         XsuccessLabel.setText("Login Successful!\nPress 'OK' to continue ");
