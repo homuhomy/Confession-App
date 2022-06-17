@@ -37,6 +37,8 @@
                </children>
             </HBox>
             <Label fx:id="warningSubmit" layoutX="285.0" layoutY="115.0" prefHeight="17.0" prefWidth="268.0" textFill="#ff2626" />
+            <Button layoutX="27.0" layoutY="375.0" mnemonicParsing="false" onAction="#stopMusic" text="MUTE" />
+            <Button layoutX="19.0" layoutY="412.0" mnemonicParsing="false" onAction="#continueMusic" text="UNMUTE" />
          </children>
       </AnchorPane>
    </center>

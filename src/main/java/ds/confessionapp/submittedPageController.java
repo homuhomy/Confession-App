@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.Clip;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,6 +22,8 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static ds.confessionapp.newMusic.clip;
 
 public class submittedPageController implements Initializable {
 
@@ -61,6 +64,15 @@ public class submittedPageController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void stopMusic(){
+        clip.stop();
+    }
+
+    public void continueMusic() {
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
 }

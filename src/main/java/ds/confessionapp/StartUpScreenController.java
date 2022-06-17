@@ -38,6 +38,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.Date;
 
+import static ds.confessionapp.newMusic.clip;
+
 
 public class StartUpScreenController implements Initializable {
 
@@ -260,6 +262,15 @@ public class StartUpScreenController implements Initializable {
            Xsuccess();
         }
 //            System.exit(0);
+    }
+
+    public void stopMusic(){
+        clip.stop();
+    }
+
+    public void continueMusic() {
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public int verify(String username, String pswd){
