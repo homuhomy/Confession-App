@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.ViewPageController">
    <left>
       <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
@@ -26,17 +27,17 @@
    <center>
       <AnchorPane prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="683.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="16.0" layoutX="540.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/search-interface-symbol.png" />
                </image>
             </ImageView>
-            <Label layoutX="65.0" layoutY="20.0" text="Let's see what everyone is talking about!">
+            <Label layoutX="53.0" layoutY="21.0" text="Let's see what everyone is talking about!">
                <font>
                   <Font name="PP Pangram Sans Semibold" size="20.0" />
                </font>
             </Label>
-            <HBox layoutX="475.0" layoutY="20.0" prefHeight="27.0" prefWidth="166.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
+            <HBox layoutX="157.0" layoutY="56.0" prefHeight="30.0" prefWidth="370.0" styleClass="search_tf" stylesheets="@Stylesheet.css">
                <effect>
                   <DropShadow>
                      <color>
@@ -45,35 +46,24 @@
                   </DropShadow>
                </effect>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Search Confession" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="searchTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Type keyword..." style="-fx-background-color: transparent;" />
                </children>
             </HBox>
-            <AnchorPane layoutX="475.0" layoutY="359.0" prefHeight="70.0" prefWidth="200.0" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css">
+            <AnchorPane layoutX="51.0" layoutY="95.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="657.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
                <children>
-                  <Label id="confession_id" layoutX="29.0" layoutY="14.0" text="#Confession_id" textFill="#606ed7">
-                     <font>
-                        <Font name="PP Pangram Sans Semibold" size="13.0" />
-                     </font>
-                  </Label>
-                  <Label id="creation_date" layoutX="33.0" layoutY="35.0" text="Creation_Date" textFill="WHITE">
-                     <font>
-                        <Font name="PP Pangram Sans Semibold" size="13.0" />
-                     </font>
-                  </Label>
+                  <Label fx:id="confessions" layoutX="50.0" layoutY="163.0" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" visible="false" />
+                  <TableView fx:id="table" layoutX="14.0" layoutY="11.0" prefHeight="304.0" prefWidth="645.0" stylesheets="@Stylesheet.css">
+                    <columns>
+                      <TableColumn fx:id="confessionColumn" prefWidth="428.0" text="Confession" />
+                      <TableColumn fx:id="IDColumn" prefWidth="98.0" resizable="false" text="ID" />
+                        <TableColumn fx:id="dateColumn" minWidth="10.0" prefWidth="105.0" text="Date" />
+                    </columns>
+                  </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="51.0" layoutY="95.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="407.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
-               <children>
-                  <Label fx:id="confessions" layoutX="50.0" layoutY="163.0" onDragDetected="#PostConfessions" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" visible="false" />
-                  <Button fx:id="viewconfessionsbutton" layoutX="118.0" layoutY="167.0" mnemonicParsing="false" onAction="#switchScenes" text="Click Here to View Confessions" />
-                  <TextArea fx:id="postArea" layoutX="84.0" layoutY="14.0" prefHeight="144.0" prefWidth="239.0" />
-               </children>
-            </AnchorPane>
-            <Button fx:id="backForadmin" layoutX="65.0" layoutY="57.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back to Homepage" textFill="WHITE" />
-            <Button fx:id="backForadmin1" layoutX="632.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Next" textFill="WHITE" />
-            <Button fx:id="backForadmin11" layoutX="560.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Previous" textFill="WHITE" />
-            <Button layoutX="-12.0" layoutY="9.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
-            <Button layoutX="24.0" layoutY="9.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+            <Button fx:id="backButton" layoutX="53.0" layoutY="58.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back to Home" textFill="WHITE" />
+            <Button fx:id="view" layoutX="639.0" layoutY="58.0" mnemonicParsing="false" onAction="#View" styleClass="backButton" stylesheets="@Stylesheet.css" text="View" textFill="WHITE" />
+            <Button fx:id="update" layoutX="575.0" layoutY="58.0" mnemonicParsing="false" onAction="#start" styleClass="backButton" stylesheets="@Stylesheet.css" text="Update" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>
@@ -85,6 +75,8 @@
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
+            <Button fx:id="Mute" layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+            <Button fx:id="Unmute" layoutX="51.0" layoutY="4.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
          </children></AnchorPane>
    </bottom>
    <right>

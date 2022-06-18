@@ -3,7 +3,16 @@ package ds.confessionapp.adminPanel;
 import java.util.LinkedList;
 
 public class Queue<E> {
+
+    public LinkedList<E> getList() {
+        return list;
+    }
+
     private LinkedList<E> list = new LinkedList();
+
+    public void setList(LinkedList<E> list) {
+        this.list = list;
+    }
 
     public Queue(){
 

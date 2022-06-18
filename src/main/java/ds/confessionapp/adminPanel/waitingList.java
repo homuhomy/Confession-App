@@ -10,6 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.Calendar;
+import java.util.Date;
+import java.time.ZonedDateTime;
 
 public class waitingList {
     static Queue<String> confess = new Queue<>();
@@ -19,7 +22,7 @@ public class waitingList {
 
         //queues everything in the Queue
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content FROM storeConfession_table ");
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -36,121 +39,138 @@ public class waitingList {
 
     }
 
-    public static void WL(){
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println(confess.dequeue());
-            }
-        };
-
-        TimerTask task1 = new TimerTask(){
-         public void run() {
-                System.out.println("1" + confess.dequeue());
-            }
-        };
-
-        TimerTask task2 = new TimerTask(){
-            public void run() {
-                System.out.println("2"+confess.dequeue());
-            }
-        };
+    public static void Wait(){
+        try{
+        Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT creation_date FROM storeConfession_table ");
+        ResultSet resultSet = preparedStatement.executeQuery();
 
 
-        while(!confess.isEmpty()&&confess.getSize()!=0) {
-            int i=0;
-            System.out.println( i +" "+ confess.getSize());
+            while(!confess.isEmpty()) {
+                int i=1;
+                Date date = new Date();
+                Date curr = new Date();
+//                System.out.println("Date: " +date.getTime());
+//                System.out.println(curr.getTime());
 
-            if (confess.getSize() <= 5) {
-                while (!confess.isEmpty()) {
-                    if(confess.getSize()==0){break;}
-                    timer.scheduleAtFixedRate(task, 10, 100 * 60);
-                }
-            }
+                if(confess.getSize()<=5){
+                    //change the numbers to minutes
+                    while(!(curr.getTime()-date.getTime()> 1000*10&&curr.getTime()-date.getTime()<= 20*1000)){
+                        curr = new Date();
 
-            if (confess.getSize() <= 10) {
-                while (!confess.isEmpty()) {
-                    if(confess.getSize()<5) {break;}
-                    timer.scheduleAtFixedRate(task1, 10, 100 * 40);
-
-                }
-            }
-
-            if (confess.getSize()>10){
-                while(!confess.isEmpty()){
-                    if(confess.getSize()<10) {break;}
-                    timer.scheduleAtFixedRate(task2, 10, 100 * 20);
                     }
-            }
+                    System.out.println(curr);
+                    System.out.println("1 "+confess.dequeue());
+                }
 
-//            confess.clear();
-            System.out.println("i "+i);
-            i++;
-            break;
+                else if(confess.getSize()<=10){
+                    //change the numbers to minutes
+                    while(!(curr.getTime()-date.getTime()> 1000*10&&curr.getTime()-date.getTime()<= 20*1000)){
+                    curr = new Date();
+
+                }
+                System.out.println(curr);
+                System.out.println("2 "+confess.dequeue());
+                }
+
+                else{
+                    while(!(curr.getTime()-date.getTime()> 1000*10&&curr.getTime()-date.getTime()<= 20*1000)){
+                        curr = new Date();
+
+                    }
+                    System.out.println(curr);
+                    System.out.println("3 "+confess.dequeue());
+                }
+
+                i++;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
+
     }
-
-//    public static void WaitingList() {
-//        try {
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
-//            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(file_content) FROM storeConfession_table ");
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//
-//
-//            QueueList();
-//
-//
-//            while (!resultSet.next()) {
-//
-//                if (resultSet.getInt("count(file_content)") <= 5) {
-//                    Timer timer = new Timer();
-//                    TimerTask task = new TimerTask() {
-//                        @Override
-//                        public void run() {
-//                            System.out.println(confess.dequeue());
-//                        }
-//                    };
-//                    while (!confess.isEmpty()) {
-//                        timer.scheduleAtFixedRate(task, 10, 10);
-//                    }
-//                } else if (resultSet.getInt("count(file_content)") <= 10) {
-//                    Timer timer = new Timer();
-//                    TimerTask task = new TimerTask() {
-//                        @Override
-//                        public void run() {
-//                            System.out.println(confess.dequeue());
-//                        }
-//                    };
-//                    timer.scheduleAtFixedRate(task, 20, 20);
-//
-//                } else {
-//                    Timer timer = new Timer();
-//                    TimerTask task = new TimerTask() {
-//                        @Override
-//                        public void run() {
-//                            confess.dequeue();
-//                        }
-//                    };
-//                    timer.schedule(task, 0, 15);
-//                }
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-
-    public static String batchRemoval(int i) {
-
-        return confess.remove(i);
-    }
-
 
     public static void main(String[] args) {
         QueueList();
-        WL();
+        Wait();
+
         }
 }
+
+//            while(!confess.isEmpty()) {
+//            table.refresh();
+//            int i = 1;
+//            java.util.Date date = new java.util.Date();
+//            java.util.Date curr = new java.util.Date();
+//                System.out.println("Date: " +date.getTime());
+//                System.out.println(curr.getTime());
+//
+//            if (confess.getSize() <= 5) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new java.util.Date();
+//                }
+//                System.out.println("1 "+curr);
+//                table.setItems(confessionList());
+//
+//            } else if (confess.getSize() <= 10) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new java.util.Date();
+//
+//                }
+//                System.out.println("2 "+curr);
+//                table.setItems(confessionList());
+//
+//            } else {
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
+//                    curr = new Date();
+//
+//                }
+//                System.out.println("3 "+curr);
+//                table.setItems(confessionList());
+//            }
+//        }
+
+//
+//        while(!confess.isEmpty()) {
+////            table.refresh();
+//            int i = 1;
+//            java.util.Date date = new Date();
+//            java.util.Date curr = new Date();
+////                System.out.println("Date: " +date.getTime());
+////                System.out.println(curr.getTime());
+//
+//            if (confess.getSize() <= 5) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new Date();
+//                }
+//                System.out.println("1 "+curr);
+//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
+////                table.setItems(confessionList());
+//
+//            } else if (confess.getSize() <= 10) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new Date();
+//
+//                }
+//                System.out.println("2 "+curr);
+//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
+////                table.setItems(confessionList());
+//
+//            } else {
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
+//                    curr = new Date();
+//
+//                }
+//                System.out.println("3 "+curr);
+//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
+////                table.setItems(confessionList());
+//
+//            }
+//
+//        }
+////        confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));

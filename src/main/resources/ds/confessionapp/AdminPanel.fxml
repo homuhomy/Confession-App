@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.AdminPanelController">
    <children>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="373.0" prefWidth="575.0">
          <children>
@@ -14,8 +16,19 @@
                   <Font size="30.0" />
                </font>
             </Text>
-            <Button fx:id="backforAdminPanel" layoutX="509.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchScenes" text="Back" />
-            <AnchorPane layoutX="14.0" layoutY="34.0" prefHeight="299.0" prefWidth="548.0" />
+            <Button fx:id="Back" layoutX="509.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchScenes" text="Back" />
+            <AnchorPane layoutX="14.0" layoutY="34.0" prefHeight="299.0" prefWidth="548.0">
+               <children>
+                  <TableView fx:id="table" layoutY="-3.0" prefHeight="299.0" prefWidth="550.0">
+                    <columns>
+                        <TableColumn fx:id="confessionCol" prefWidth="362.0" text="Confession" />
+                      <TableColumn fx:id="idCol" prefWidth="50.0" text="ID" />
+                        <TableColumn fx:id="replyCol" prefWidth="55.0" text="Reply ID" />
+                      <TableColumn fx:id="dateCol" prefWidth="82.0" text="Date" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+            <Button fx:id="Delete" layoutX="422.0" layoutY="334.0" mnemonicParsing="false" onAction="#remov" text="Delete" />
          </children>
       </AnchorPane>
    </children>
