@@ -98,6 +98,8 @@ public class ViewPageController implements Initializable {
 
     ObservableList<ViewTable> confession = FXCollections.observableArrayList();
 
+
+
 //    ViewTable v = new ViewTable("ID","confession","date");
     public void View(ActionEvent event){
         if(event.getSource()==view){
@@ -202,7 +204,7 @@ public class ViewPageController implements Initializable {
         });
         confessionList();
 
-        /*//initial filtered list
+        //initial filtered list
         FilteredList<ViewTable> filteredData = new FilteredList<>(confession, b -> true);
         searchTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             filteredData.setPredicate(confessionSearchModel -> {
@@ -225,9 +227,9 @@ public class ViewPageController implements Initializable {
 
         SortedList<ViewTable> sortedData = new SortedList<>(filteredData);
         //Bind sorted result with Table View
-        sortedData.comparatorProperty().bind(TableView.comparatorProperty());
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
         //apply filtered and sorted data to the table view
-        TableView.setItems(sortedData);*/
+        table.setItems(sortedData);
 
     }
 
