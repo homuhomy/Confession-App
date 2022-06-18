@@ -16,12 +16,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.Clip;
 import java.net.URL;
 import java.sql.*;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static ds.confessionapp.newMusic.clip;
 
 public class ViewPageController implements Initializable {
     static Queue<String> confess = new Queue<String>();
@@ -30,7 +33,7 @@ public class ViewPageController implements Initializable {
 
     static Queue<String> test = new Queue<>();
     @FXML
-    private Button backButton, update, view;
+    private Button backButton, update, view, Mute, Unmute;
 
     private int count =0;
     public static void QueueList() {
@@ -98,46 +101,11 @@ public class ViewPageController implements Initializable {
         if(event.getSource()==update) {
             table.refresh();
             table.setItems(confessionList());
-//            while(!confess.isEmpty()) {
-//            table.refresh();
-//            int i = 1;
-//            java.util.Date date = new java.util.Date();
-//            java.util.Date curr = new java.util.Date();
-//                System.out.println("Date: " +date.getTime());
-//                System.out.println(curr.getTime());
-//
-//            if (confess.getSize() <= 5) {
-//                //change the numbers to minutes
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
-//                    curr = new java.util.Date();
-//                }
-//                System.out.println("1 "+curr);
-//                table.setItems(confessionList());
-//
-//            } else if (confess.getSize() <= 10) {
-//                //change the numbers to minutes
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
-//                    curr = new java.util.Date();
-//
-//                }
-//                System.out.println("2 "+curr);
-//                table.setItems(confessionList());
-//
-//            } else {
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
-//                    curr = new Date();
-//
-//                }
-//                System.out.println("3 "+curr);
-//                table.setItems(confessionList());
-//            }
-//        }
         }
     }
     public ObservableList<ViewTable> confessionList(){
 
         ObservableList<ViewTable> confession = FXCollections.observableArrayList();
-        Timer timer = new Timer();
 
         if(!confess.isEmpty()){
         while(!confess.isEmpty()){
@@ -178,48 +146,6 @@ public class ViewPageController implements Initializable {
 
             QueueList();
         }
-
-//
-//        while(!confess.isEmpty()) {
-////            table.refresh();
-//            int i = 1;
-//            java.util.Date date = new Date();
-//            java.util.Date curr = new Date();
-////                System.out.println("Date: " +date.getTime());
-////                System.out.println(curr.getTime());
-//
-//            if (confess.getSize() <= 5) {
-//                //change the numbers to minutes
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
-//                    curr = new Date();
-//                }
-//                System.out.println("1 "+curr);
-//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
-////                table.setItems(confessionList());
-//
-//            } else if (confess.getSize() <= 10) {
-//                //change the numbers to minutes
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
-//                    curr = new Date();
-//
-//                }
-//                System.out.println("2 "+curr);
-//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
-////                table.setItems(confessionList());
-//
-//            } else {
-//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
-//                    curr = new Date();
-//
-//                }
-//                System.out.println("3 "+curr);
-//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
-////                table.setItems(confessionList());
-//
-//            }
-//
-//        }
-////        confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
 
         return confession;
     }
@@ -270,6 +196,15 @@ public class ViewPageController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void stopMusic(){
+        clip.stop();
+    }
+
+    public void continueMusic() {
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 }
 

@@ -97,3 +97,80 @@ public class waitingList {
 
         }
 }
+
+//            while(!confess.isEmpty()) {
+//            table.refresh();
+//            int i = 1;
+//            java.util.Date date = new java.util.Date();
+//            java.util.Date curr = new java.util.Date();
+//                System.out.println("Date: " +date.getTime());
+//                System.out.println(curr.getTime());
+//
+//            if (confess.getSize() <= 5) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new java.util.Date();
+//                }
+//                System.out.println("1 "+curr);
+//                table.setItems(confessionList());
+//
+//            } else if (confess.getSize() <= 10) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new java.util.Date();
+//
+//                }
+//                System.out.println("2 "+curr);
+//                table.setItems(confessionList());
+//
+//            } else {
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
+//                    curr = new Date();
+//
+//                }
+//                System.out.println("3 "+curr);
+//                table.setItems(confessionList());
+//            }
+//        }
+
+//
+//        while(!confess.isEmpty()) {
+////            table.refresh();
+//            int i = 1;
+//            java.util.Date date = new Date();
+//            java.util.Date curr = new Date();
+////                System.out.println("Date: " +date.getTime());
+////                System.out.println(curr.getTime());
+//
+//            if (confess.getSize() <= 5) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new Date();
+//                }
+//                System.out.println("1 "+curr);
+//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
+////                table.setItems(confessionList());
+//
+//            } else if (confess.getSize() <= 10) {
+//                //change the numbers to minutes
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 5 * 1000)) {
+//                    curr = new Date();
+//
+//                }
+//                System.out.println("2 "+curr);
+//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
+////                table.setItems(confessionList());
+//
+//            } else {
+//                while (!(curr.getTime() - date.getTime() > 1000 * 2 && curr.getTime() - date.getTime() <= 8 * 1000)) {
+//                    curr = new Date();
+//
+//                }
+//                System.out.println("3 "+curr);
+//                confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
+////                table.setItems(confessionList());
+//
+//            }
+//
+//        }
+////        confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), DATE.dequeue()));
