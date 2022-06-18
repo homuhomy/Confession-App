@@ -47,6 +47,7 @@
             </ImageView>
             <Button layoutX="-15.0" layoutY="12.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
             <Button layoutX="23.0" layoutY="12.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+            <Button fx:id="mediaPlayer" layoutX="64.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Change Media" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>
