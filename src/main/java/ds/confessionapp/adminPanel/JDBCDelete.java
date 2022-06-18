@@ -45,11 +45,21 @@ public class JDBCDelete {
                 String r_id = resultSet.getString("reply_id");
                 deleteConfess = c_id;
                 ps1.setString(2, deleteConfess);
+                System.out.println("outside");
+                System.out.println(deleteConfess);
+                System.out.println();
+
+                File mainFile = new File("InputFiles/" + deleteConfess + ".txt");
+                System.out.println(deleteConfess);
+                System.out.println("input");
+//                mainFile.delete();
+
                 if(r_id.equals("")){
                     continue;
                 }
 
                 else if(r_id.equals(deleteConfess)){
+                    System.out.println("inside");
                     ps1.setString(1, c_id);
                     ps1.setString(2, r_id);
 
@@ -65,9 +75,7 @@ public class JDBCDelete {
             //do for loop for more than 1 file
             System.out.println("Deleting the file");
             //get current file name and delete them
-            File mainFile = new File("InputFiles/" + deleteConfessionId + ".txt");
-            System.out.println("input");
-//            mainFile.delete();
+
 
 
             System.out.println("----------------------------------------");
