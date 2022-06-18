@@ -46,7 +46,7 @@
                   </DropShadow>
                </effect>
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Search Confession" style="-fx-background-color: transparent;" />
+                  <TextField fx:id="searchTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" promptText="Type keyword..." style="-fx-background-color: transparent;" />
                </children>
             </HBox>
             <AnchorPane layoutX="51.0" layoutY="95.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="335.0" prefWidth="657.0" styleClass="confessionPost" stylesheets="@Stylesheet.css">
@@ -54,8 +54,8 @@
                   <Label fx:id="confessions" layoutX="50.0" layoutY="163.0" prefHeight="17.0" prefWidth="323.0" text="THIS PART SHOULD DISPLAY THE CONFESSION POST" visible="false" />
                   <TableView fx:id="table" layoutX="14.0" layoutY="11.0" prefHeight="304.0" prefWidth="645.0" stylesheets="@Stylesheet.css">
                     <columns>
-                      <TableColumn fx:id="confessionColumn" prefWidth="401.0" text="Confession" />
-                      <TableColumn fx:id="IDColumn" prefWidth="125.0" resizable="false" text="ID" />
+                      <TableColumn fx:id="confessionColumn" prefWidth="428.0" text="Confession" />
+                      <TableColumn fx:id="IDColumn" prefWidth="98.0" resizable="false" text="ID" />
                         <TableColumn fx:id="dateColumn" minWidth="10.0" prefWidth="105.0" text="Date" />
                     </columns>
                   </TableView>

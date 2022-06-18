@@ -93,12 +93,8 @@ public class SearchPageController implements Initializable {
             });
 
             ReplyIdColumn.setCellValueFactory(new PropertyValueFactory<>("reply_id"));
-            //ReplyIdColumn.setStyle("-fx-alignment: CENTER;");
             DateColumn.setCellValueFactory(new PropertyValueFactory<>("creation_date"));
-            //DateColumn.setStyle("-fx-alignment: CENTER;");
             TableView.setItems(confessionSearchModelObservableList);
-            //TableView.setSortPolicy();
-
             //initial filtered list
             FilteredList<ConfessionSearchModel> filteredData = new FilteredList<>(confessionSearchModelObservableList, b -> true);
             searchTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
