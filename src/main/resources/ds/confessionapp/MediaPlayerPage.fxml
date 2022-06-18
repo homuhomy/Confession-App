@@ -12,21 +12,15 @@
     <left>
         <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="homeButtonIcon" layoutX="5.0" layoutY="184.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
-                <Button fx:id="searchButtonIcon" layoutX="5.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
-                <Button fx:id="submitButtonIcon" layoutX="5.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
+                <Button fx:id="homeButtonIcon" layoutX="6.0" layoutY="201.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
+                <Button fx:id="submitButtonIcon" layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
             </children>
         </AnchorPane>
     </left>
     <center>
         <AnchorPane prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
-                <Text layoutX="82.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to UM Confessions App" textAlignment="CENTER" wrappingWidth="578.1600341796875">
-                    <font>
-                        <Font name="PP Pangram Sans Bold" size="18.0" />
-                    </font>
-                </Text>
-                <Text layoutX="194.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose any song you prefer from our playlist below" textAlignment="CENTER" wrappingWidth="353.1600341796875">
+                <Text layoutX="194.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose any song you prefer from our playlist below" textAlignment="CENTER" wrappingWidth="353.1600341796875">
                     <font>
                         <Font name="PP Pangram Sans Light" size="14.0" />
                     </font>

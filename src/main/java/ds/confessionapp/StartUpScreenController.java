@@ -117,19 +117,12 @@ public class StartUpScreenController implements Initializable {
 
     DatabaseSaveData d = new DatabaseSaveData();
     public static void main(String[] args) {
-//        Timer timer = new Timer();
-//        TimerTask task = new Helper();
-//
-//        timer.schedule(task, 200,5000);
-
-
     }
 
     public void switchScenes(ActionEvent event) throws Exception {
 
         Stage stage = null;
         Parent root = null;
-//        System.out.println(event.getSource());
         if(event.getSource()== submitButton){
             //confession.setWrapText(true);
             stage = (Stage) submitButton.getScene().getWindow();
@@ -143,15 +136,14 @@ public class StartUpScreenController implements Initializable {
             stage = (Stage) submitButtonIcon.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
-
         else if(event.getSource().equals(KeyCode.ENTER)){
             //stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
         }
-        else if(event.getSource()==search){
-            stage = (Stage) search.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
-        }
+//        else if(event.getSource()==search){
+//            stage = (Stage) search.getScene().getWindow();
+//            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
+//        }
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("ViewConfessionPage.fxml"));
@@ -203,8 +195,6 @@ public class StartUpScreenController implements Initializable {
             confessions.setVisible(true);
             confessions.setText(confess.toString()); //when button is clicked, the confessions can be viewed
         }
-
-
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
             //submit new pst to tempFiles folder
