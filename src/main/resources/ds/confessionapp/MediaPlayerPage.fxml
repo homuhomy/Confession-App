@@ -12,21 +12,15 @@
     <left>
         <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="homeButtonIcon" layoutX="5.0" layoutY="184.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
-                <Button fx:id="searchButtonIcon" layoutX="5.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
-                <Button fx:id="submitButtonIcon" layoutX="5.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
+                <Button fx:id="homeButtonIcon" layoutX="6.0" layoutY="201.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
+                <Button fx:id="submitButtonIcon" layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
             </children>
         </AnchorPane>
     </left>
     <center>
         <AnchorPane prefHeight="500.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
-                <Text layoutX="82.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to UM Confessions App" textAlignment="CENTER" wrappingWidth="578.1600341796875">
-                    <font>
-                        <Font name="PP Pangram Sans Bold" size="18.0" />
-                    </font>
-                </Text>
-                <Text layoutX="194.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose any song you prefer from our playlist below" textAlignment="CENTER" wrappingWidth="353.1600341796875">
+                <Text layoutX="194.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose any song you prefer from our playlist below" textAlignment="CENTER" wrappingWidth="353.1600341796875">
                     <font>
                         <Font name="PP Pangram Sans Light" size="14.0" />
                     </font>
@@ -43,8 +37,6 @@
                         <Image url="@images/icons8-system-administrator-male-48.png" />
                     </image>
                 </ImageView>
-                <Button layoutX="-15.0" layoutY="12.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
-                <Button layoutX="23.0" layoutY="12.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
                 <Text layoutX="71.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recently Added">
                     <font>
                         <Font name="Raleway Bold" size="18.0" />
@@ -52,10 +44,10 @@
                 </Text>
                 <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="66.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/bet-on-me.jpg" />
+                        <Image url="@images/lukrembo-biscuit.jpg" />
                     </image>
                 </ImageView>
-                <Text layoutX="31.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bet On Me Walk off the Earth Ft. D Smoke">
+                <Text layoutX="82.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lukrembo - Biscuits">
                     <font>
                         <Font name="Segoe UI" size="12.0" />
                     </font>
@@ -85,6 +77,10 @@
         </AnchorPane>
     </center>
     <bottom>
-        <AnchorPane prefHeight="37.0" prefWidth="765.0" BorderPane.alignment="CENTER" />
+        <AnchorPane prefHeight="37.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+         <children>
+                <Button layoutX="18.0" layoutY="3.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+                <Button layoutX="60.0" layoutY="3.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+         </children></AnchorPane>
     </bottom>
 </BorderPane>

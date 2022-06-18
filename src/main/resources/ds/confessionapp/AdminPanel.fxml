@@ -29,6 +29,8 @@
                   </TableView>
                </children></AnchorPane>
             <Button fx:id="Delete" layoutX="569.0" layoutY="406.0" mnemonicParsing="false" onAction="#remov" styleClass="backButton" stylesheets="@Stylesheet.css" text="Delete" textFill="WHITE" />
+            <Button layoutX="4.0" layoutY="439.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="Button" />
+            <Button layoutX="45.0" layoutY="439.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="Button" />
          </children>
       </AnchorPane>
    </children>

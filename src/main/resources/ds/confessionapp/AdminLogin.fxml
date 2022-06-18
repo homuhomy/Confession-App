@@ -4,143 +4,47 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ds.confessionapp.StartUpScreenController">
    <children>
-      <AnchorPane layoutX="36.0" prefHeight="372.0" prefWidth="574.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="534.0" layoutX="-74.0" layoutY="-22.0" stroke="BLACK" strokeType="INSIDE" width="848.0" />
+      <ImageView fitHeight="475.0" fitWidth="776.0" layoutX="33.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Untitled-design.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="39.0" layoutY="1.0" prefHeight="372.0" prefWidth="574.0">
          <children>
-            <Circle fill="DODGERBLUE" layoutX="448.0" layoutY="108.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="393.0" layoutY="194.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="282.0" layoutY="252.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="535.0" layoutY="164.0" radius="100.0" stroke="BLACK" strokeType="INSIDE">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startY="0.8056872037914692">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.32549020648002625" green="0.27450981736183167" blue="0.4000000059604645" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Circle>
-            <Circle fill="#138086" layoutX="347.0" layoutY="65.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle layoutX="594.0" layoutY="404.0" radius="100.0" stroke="BLACK" strokeType="INSIDE">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8627451062202454" green="0.5254902243614197" blue="0.3960784375667572" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Circle>
-            <Circle layoutX="188.0" layoutY="64.0" radius="100.0" stroke="BLACK" strokeType="INSIDE">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.8627451062202454" green="0.5254902243614197" blue="0.3960784375667572" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Circle>
-            <Circle layoutX="56.0" layoutY="344.0" radius="100.0" stroke="BLACK" strokeType="INSIDE">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.32549020648002625" green="0.27450981736183167" blue="0.4000000059604645" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-            </Circle>
-            <TextField fx:id="input" layoutX="331.0" layoutY="195.0" promptText="User/ID" />
-            <PasswordField fx:id="pswdinput" layoutX="331.0" layoutY="227.0" promptText="Password" />
-            <Button fx:id="login" layoutX="412.0" layoutY="270.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#switchScenes" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Login" />
-            <Button fx:id="backForadmin" layoutX="494.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
+            <TextField fx:id="input" layoutX="154.0" layoutY="183.0" promptText="User/ID" />
+            <PasswordField fx:id="pswdinput" layoutX="153.0" layoutY="223.0" promptText="Password" />
+            <Button fx:id="login" layoutX="98.0" layoutY="270.0" mnemonicParsing="false" onAction="#loginAction" onMouseClicked="#switchScenes" prefHeight="25.0" prefWidth="149.0" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Login" />
+            <Button fx:id="backForadmin" layoutX="267.0" layoutY="383.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
             <Button fx:id="ok" layoutX="275.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchScenes" text="Ok" visible="false" />
             <Label fx:id="XsuccessLabel" layoutX="271.0" layoutY="274.0" text="Status" visible="false" />
-            <Button layoutX="12.0" layoutY="13.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
-            <Circle fill="#cd7672" layoutX="369.0" layoutY="307.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="14.0" layoutY="65.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#138086" layoutX="88.0" layoutY="220.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="295.0" layoutY="365.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#138086" layoutX="201.0" layoutY="332.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#cd7672" layoutX="214.0" layoutY="423.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="380.0" layoutY="423.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="448.0" layoutY="365.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#cd7672" layoutX="494.0" layoutY="283.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#cd7672" layoutX="263.0" layoutY="169.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="468.0" layoutY="40.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="26.0" layoutX="226.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" width="86.0" />
-            <Circle fill="#138086" layoutX="574.0" layoutY="52.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="628.0" layoutY="274.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text layoutX="231.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User: ">
+            <Button layoutX="16.0" layoutY="446.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+            <Text layoutX="51.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User         : ">
                <font>
                   <Font size="16.0" />
                </font></Text>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="26.0" layoutX="226.0" layoutY="227.0" stroke="BLACK" strokeType="INSIDE" width="86.0" />
-            <Text layoutX="230.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password: ">
+            <Text layoutX="51.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password : ">
                <font>
                   <Font size="16.0" />
                </font></Text>
-            <Circle fill="#cd7672" layoutX="321.0" layoutY="7.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="10.0" layoutY="169.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#cd7672" layoutX="69.0" layoutY="121.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="175.0" layoutY="194.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="DODGERBLUE" layoutX="667.0" layoutY="89.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="667.0" layoutY="194.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#eeb462" layoutX="124.0" layoutY="457.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="36.0" layoutX="237.0" layoutY="119.0" stroke="BLACK" strokeType="INSIDE" width="229.0" />
-            <Text layoutX="247.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Panel" wrappingWidth="260.388671875">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fd7f2c" height="4.0" layoutX="58.0" layoutY="136.0" stroke="#fd7f2c" strokeType="INSIDE" width="229.0" />
+            <Text layoutX="66.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Login" wrappingWidth="260.388671875">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Raleway" size="36.0" />
                </font>
             </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bca7a7" height="17.0" layoutX="381.0" layoutY="191.0" stroke="#bca7a7" strokeType="INSIDE" width="2.0" />
          </children>
       </AnchorPane>
-      <Circle fill="#cd7672" layoutX="735.0" layoutY="23.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#138086" layoutX="754.0" layoutY="301.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#cd7672" layoutX="756.0" layoutY="140.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button layoutX="10.0" layoutY="12.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+      <Button layoutX="11.0" layoutY="448.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
    </children>
 </AnchorPane>
