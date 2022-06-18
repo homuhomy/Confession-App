@@ -12,9 +12,8 @@
    <left>
       <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="homeButtonIcon" layoutX="5.0" layoutY="184.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
-            <Button fx:id="searchButtonIcon" layoutX="5.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
-            <Button fx:id="submitButtonIcon" layoutX="5.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
+            <Button fx:id="homeButtonIcon" layoutX="6.0" layoutY="201.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
+            <Button fx:id="submitButtonIcon" layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
          </children>
       </AnchorPane>
    </left>
@@ -31,23 +30,22 @@
                   <Font name="PP Pangram Sans Light" size="14.0" />
                </font>
             </Text>
-            <Button fx:id="submitButton" layoutX="161.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" textFill="WHITE" />
-            <Button fx:id="viewButton" layoutX="305.0" layoutY="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions" textFill="WHITE" />
+            <Button fx:id="submitButton" layoutX="233.0" layoutY="134.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Submit Confession" textFill="WHITE" />
+            <Button fx:id="viewButton" layoutX="377.0" layoutY="134.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="View Confessions" textFill="WHITE" />
             <ImageView fitHeight="276.0" fitWidth="453.0" layoutX="150.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/students_main.png" />
                </image>
             </ImageView>
-            <Button fx:id="admin" layoutX="671.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Admin" />
-            <Button fx:id="search" layoutX="448.0" layoutY="133.0" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="135.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Search Confession" textFill="WHITE" />
-            <ImageView fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="637.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="admin" layoutX="674.0" layoutY="20.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Admin" />
+            <ImageView fx:id="AdminSetting" fitHeight="23.0" fitWidth="23.0" layoutX="640.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
-            <Button layoutX="-15.0" layoutY="12.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
-            <Button layoutX="23.0" layoutY="12.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
-            <Button fx:id="mediaPlayer" layoutX="64.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="131.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Change Media" textFill="WHITE" />
+            <Button layoutX="-15.0" layoutY="23.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+            <Button layoutX="23.0" layoutY="23.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+            <Button fx:id="mediaPlayer" layoutX="64.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="104.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Change Media" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

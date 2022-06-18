@@ -17,17 +17,15 @@
             <Font name="PP Pangram Sans Light" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="submitButton" layoutX="283.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Back" textFill="WHITE" />
-      <Button fx:id="viewButton" layoutX="348.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="Go to confession page" />
+      <Button fx:id="submitButton" layoutX="258.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="backButton" stylesheets="@Stylesheet.css" text="Submit Another" textFill="WHITE" />
+      <Button fx:id="viewButton" layoutX="375.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="confessionPostInfo" stylesheets="@Stylesheet.css" text="View  Published Confession" />
       <Label layoutX="167.0" layoutY="240.0" text="Your post was submitted at :">
          <font>
             <Font name="PP Pangram Sans Light" size="14.0" />
          </font>
       </Label>
       <Label fx:id="st" layoutX="361.0" layoutY="240.0" onInputMethodTextChanged="#switchScenes" prefHeight="17.0" prefWidth="196.0" text="date" textFill="#2e35ff" />
-      <Button layoutX="77.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="previous-button-icon" stylesheets="@Stylesheet.css" text="Button" />
       <Button layoutX="14.0" layoutY="14.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" onAction="#stopMusic" prefHeight="48.0" prefWidth="81.0" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="Button" />
       <Button layoutX="51.0" layoutY="14.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" onAction="#continueMusic" prefHeight="48.0" prefWidth="81.0" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="Button" />
-      <Button layoutX="190.0" layoutY="395.0" maxHeight="48.0" maxWidth="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="81.0" styleClass="next-button-icon" stylesheets="@Stylesheet.css" text="Button" />
    </children>
 </AnchorPane>

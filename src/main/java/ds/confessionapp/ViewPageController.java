@@ -36,7 +36,7 @@ public class ViewPageController implements Initializable {
 
     static Queue<String> test = new Queue<>();
     @FXML
-    private Button backButton, update, view, Mute, Unmute;
+    private Button backButton, update, view, Mute, Unmute, submitButtonIcon, homeButtonIcon;
 
     @FXML
     private TextField searchTextField;
@@ -83,10 +83,7 @@ public class ViewPageController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-
-
     @FXML
     TableView<ViewTable> table;
     @FXML
@@ -97,6 +94,8 @@ public class ViewPageController implements Initializable {
     TableColumn <ViewTable, String> IDColumn;
 
     ObservableList<ViewTable> confession = FXCollections.observableArrayList();
+
+
 
 //    ViewTable v = new ViewTable("ID","confession","date");
     public void View(ActionEvent event){
@@ -202,7 +201,7 @@ public class ViewPageController implements Initializable {
         });
         confessionList();
 
-        /*//initial filtered list
+        //initial filtered list
         FilteredList<ViewTable> filteredData = new FilteredList<>(confession, b -> true);
         searchTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             filteredData.setPredicate(confessionSearchModel -> {
@@ -214,10 +213,8 @@ public class ViewPageController implements Initializable {
                     return true; //found a match for confession_id
                 } else if (confessionSearchModel.getFile_content().toLowerCase().indexOf(searchKeyword) > -1) {
                     return true; //found a match for confession_id
-//                } else if (confessionSearchModel.getReply_id().toLowerCase().indexOf(searchKeyword) > -1) {
-//                    return true; //found a match for confession_id
 //                } else if (confessionSearchModel.getCreation_date().toLowerCase().indexOf(searchKeyword) > -1) {
-//                    return true; //found a match for confession_id
+//                    return true; //found a match for date
                 } else
                     return false; //no match found
             });
@@ -225,10 +222,9 @@ public class ViewPageController implements Initializable {
 
         SortedList<ViewTable> sortedData = new SortedList<>(filteredData);
         //Bind sorted result with Table View
-        sortedData.comparatorProperty().bind(TableView.comparatorProperty());
+        sortedData.comparatorProperty().bind(table.comparatorProperty());
         //apply filtered and sorted data to the table view
-        TableView.setItems(sortedData);*/
-
+        table.setItems(sortedData);
     }
 
     public void switchScenes(ActionEvent event) throws Exception {
@@ -236,9 +232,12 @@ public class ViewPageController implements Initializable {
         Parent root = null;
 //        System.out.println(event.getSource());
 
-        if (event.getSource() == backButton) {
+        if (event.getSource() == backButton || event.getSource() == homeButtonIcon) {
             stage = (Stage) backButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
+        }else if (event.getSource() == submitButtonIcon) {
+            stage = (Stage) submitButtonIcon.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
         Scene scene = new Scene(root);
         stage.setScene(scene);

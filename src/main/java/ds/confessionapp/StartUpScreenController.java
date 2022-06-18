@@ -136,14 +136,11 @@ public class StartUpScreenController implements Initializable {
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
         //for icons
-        else if (event.getSource()==searchButtonIcon) {
-            stage = (Stage) search.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
-        } else if (event.getSource()==homeButtonIcon) {
+        else if (event.getSource()==homeButtonIcon) {
             stage = (Stage) homeButtonIcon.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("StartUpScreen.fxml"));
         }else if (event.getSource()==submitButtonIcon) {
-            stage = (Stage) search.getScene().getWindow();
+            stage = (Stage) submitButtonIcon.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("submitConfession.fxml"));
         }
 

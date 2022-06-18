@@ -17,7 +17,6 @@ public class ViewTable {
     public String getConfession_id() {
         return confession_id;
     }
-
     public Date getCreation_date() {
         return creation_date;
     }
