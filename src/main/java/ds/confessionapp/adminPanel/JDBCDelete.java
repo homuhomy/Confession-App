@@ -37,36 +37,31 @@ public class JDBCDelete {
 //            PreparedStatement ps2 = connection.prepareStatement(getReplyIdMain);
 //            ps2.executeUpdate(); //get rows
 
-            while(resultSet.next()) {
+            while(resultSet.next()){
                 String deleteConfess = deleteConfessionId;
-                ps1.setString(1, deleteConfess);
-
+//                ps1.setString(1, deleteConfessionId);
+//                ps1.setString(2, deleteConfessionId);
                 String c_id = resultSet.getString("confession_id");
                 String r_id = resultSet.getString("reply_id");
-                deleteConfess = c_id;
-                ps1.setString(2, deleteConfess);
-                System.out.println("outside");
+//                File mainFile = new File("InputFiles/" + deleteConfess + ".txt");
+//                System.out.println("DeleteConfess " + deleteConfess);
+////                mainFile.delete();
+
+
+//                if(r_id.equals("")){
+//                    continue;
+//                }
+                deleteConfess = resultSet.getString("confession_id");
                 System.out.println(deleteConfess);
-                System.out.println();
-
-                File mainFile = new File("InputFiles/" + deleteConfess + ".txt");
-                System.out.println(deleteConfess);
-                System.out.println("input");
-//                mainFile.delete();
-
-                if(r_id.equals("")){
-                    continue;
-                }
-
-                else if(r_id.equals(deleteConfess)){
+                if(c_id.equals(deleteConfess)){
                     System.out.println("inside");
-                    ps1.setString(1, c_id);
-                    ps1.setString(2, r_id);
-
+//                    ps1.setString(1, c_id);
+//                    ps1.setString(2, r_id);
+//                    mainFile.delete();
                 }
 
 
-                ps1.executeUpdate();
+//                ps1.executeUpdate();
             }
 //            ResultSet resultSet =ps.executeQuery();
 //            String rplyID = resultSet.getString("reply_id");
