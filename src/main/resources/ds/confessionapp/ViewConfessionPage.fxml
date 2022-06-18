@@ -18,9 +18,8 @@
    <left>
       <AnchorPane fx:id="sidebar" prefHeight="112.0" prefWidth="23.0" styleClass="sidebar" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="homeButtonIcon" layoutX="5.0" layoutY="184.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
-            <Button fx:id="searchButtonIcon" layoutX="5.0" layoutY="222.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="search-button-icon" stylesheets="@Stylesheet.css" />
-            <Button fx:id="submitButtonIcon" layoutX="5.0" layoutY="258.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
+            <Button fx:id="homeButtonIcon" layoutX="6.0" layoutY="201.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="home-button-icon" stylesheets="@Stylesheet.css" />
+            <Button fx:id="submitButtonIcon" layoutX="6.0" layoutY="276.0" mnemonicParsing="false" onAction="#switchScenes" styleClass="submit-button-icon" stylesheets="@Stylesheet.css" />
          </children>
       </AnchorPane>
    </left>
