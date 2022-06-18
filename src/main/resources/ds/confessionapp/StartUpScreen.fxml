@@ -43,13 +43,15 @@
                   <Image url="@images/icons8-system-administrator-male-48.png" />
                </image>
             </ImageView>
-            <Button layoutX="-15.0" layoutY="23.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
-            <Button layoutX="23.0" layoutY="23.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
-            <Button fx:id="mediaPlayer" layoutX="64.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="104.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Change Media" textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>
    <bottom>
-      <AnchorPane prefHeight="37.0" prefWidth="765.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="37.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
+            <Button layoutX="59.0" layoutY="2.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+            <Button fx:id="mediaPlayer" layoutX="655.0" layoutY="-15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchScenes" prefHeight="31.0" prefWidth="96.0" styleClass="submitButton" stylesheets="@Stylesheet.css" text="Change Music" textFill="WHITE" />
+         </children></AnchorPane>
    </bottom>
 </BorderPane>

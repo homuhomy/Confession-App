@@ -14,9 +14,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.Clip;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
+import static ds.confessionapp.newMusic.clip;
 
 public class AdminPanelController implements Initializable {
 
@@ -86,6 +89,15 @@ public class AdminPanelController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void stopMusic(){
+        clip.stop();
+    }
+
+    public void continueMusic() {
+        clip.start();
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     @Override

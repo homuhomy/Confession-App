@@ -278,7 +278,7 @@ public class StartUpScreenController implements Initializable {
 
     public void play1() {
         clip.stop();
-        String titleScreenMusic = "Bet On Me - Walk off the Earth Ft. D Smoke.wav";
+        String titleScreenMusic = "Lukrembo - Biscuit.wav";
         newMusic.playMusic(titleScreenMusic);
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
