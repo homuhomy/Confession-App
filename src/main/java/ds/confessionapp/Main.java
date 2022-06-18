@@ -30,8 +30,6 @@ public class Main extends Application {
         stage = primaryStage;
         primaryStage.setResizable(false);
 
-
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("StartUpScreen.fxml"));
         Parent root = loader.load();
 
