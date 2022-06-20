@@ -1,5 +1,6 @@
 package ds.confessionapp;
 
+import ds.confessionapp.adminPanel.SpamCheck;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +13,13 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Stage;
 
 import javax.sound.sampled.Clip;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -47,6 +50,13 @@ public class submittedPageController implements Initializable {
         this.st = st;
         st.setText(s);
         st.setVisible(true);
+        try {
+            SpamCheck.main(null);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void switchScenes(ActionEvent event) throws Exception {

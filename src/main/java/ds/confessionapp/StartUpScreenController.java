@@ -48,13 +48,13 @@ public class StartUpScreenController implements Initializable {
     @FXML
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search, mediaPlayer;
     @FXML
-    public Button homeButtonIcon, searchButtonIcon, submitButtonIcon;
+    public Button homeButtonIcon, submitButtonIcon;
     @FXML
-    public TextField input, pswdinput, confessID, searchField;
+    public TextField input, pswdinput, confessID;
     @FXML
     public TextArea confession, displayTime;
     @FXML
-    public Label XsuccessLabel, confessions, SubmissionTime, warningSubmit, time;
+    public Label XsuccessLabel, confessions, SubmissionTime, warningSubmit, time, loadingLabel;
 
     @FXML
     Label st = new Label("submitTime");
@@ -140,10 +140,6 @@ public class StartUpScreenController implements Initializable {
             //stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
         }
-//        else if(event.getSource()==search){
-//            stage = (Stage) search.getScene().getWindow();
-//            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
-//        }
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("ViewConfessionPage.fxml"));
@@ -197,6 +193,9 @@ public class StartUpScreenController implements Initializable {
         }
         //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
+            String submitting = "Adding submission...";
+            this.loadingLabel.setText(submitting);
+
             //submit new pst to tempFiles folder
             String data=confession.getText().trim(); //read contents of text area into 'data'
             String replyId = confessID.getText();
@@ -217,6 +216,7 @@ public class StartUpScreenController implements Initializable {
             }
             String newPostName = "tempFiles/newPost" + number + ".txt";
             BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
+
             try {
                 toNewTxtFile.write(content);
             }
@@ -233,6 +233,11 @@ public class StartUpScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    public void loadingStatus(){
+        loadingLabel.setVisible(true);
+        loadingLabel.setText("Adding submission...");
+    }
     public void Success(){
         XsuccessLabel.setVisible(true);
         XsuccessLabel.setText("Login Successful!\nPress 'OK' to continue ");
@@ -244,7 +249,6 @@ public class StartUpScreenController implements Initializable {
         XsuccessLabel.setText("Login Unsuccessful!\nPlease try again");
         ok.setVisible(false);
     }
-
     @FXML
     public void loginAction(ActionEvent event){
         int ans = verify(input.getText(),pswdinput.getText());
