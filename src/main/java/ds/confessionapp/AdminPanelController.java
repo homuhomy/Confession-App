@@ -1,5 +1,6 @@
 package ds.confessionapp;
 
+import ds.confessionapp.adminPanel.JDBCDelete;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -18,14 +20,19 @@ import javax.sound.sampled.Clip;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static ds.confessionapp.newMusic.clip;
 
 public class AdminPanelController implements Initializable {
 
     @FXML
-    private Button Back, Delete;
+    private Button Back, Delete, View;
 
+    @FXML
+    private TextField textField;
     @FXML
     TableView<ConfessionSearchModel> table;
     @FXML
@@ -53,26 +60,35 @@ public class AdminPanelController implements Initializable {
                 replyID = resultSet.getString("reply_id");
                 date = resultSet.getString("creation_date");
 
+            }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    ObservableList<ConfessionSearchModel> AdminList = FXCollections.observableArrayList();
+    public ObservableList<ConfessionSearchModel> LIST(){
+//        AdminList.add(new ConfessionSearchModel(ID,content,replyID,date));
+
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content,reply_id,creation_date FROM storeConfession_table ");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()){
+                ID = resultSet.getString("confession_id");
+                content = resultSet.getString("file_content");
+                replyID = resultSet.getString("reply_id");
+                date = resultSet.getString("creation_date");
+
+                AdminList.add(new ConfessionSearchModel(ID,content,replyID,date));
 
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(ad.check("#UM0012"));
-        System.out.println(ad.check("#UM0001"));
-        System.out.println(ad.check("#UM0002"));
-        System.out.println(ad.check("#UM0003"));
-        System.out.println(ad.check("#UM0004"));
-        System.out.println(ID);
-        System.out.println(content);
-        System.out.println(replyID);
-        System.out.println(date);
-    }
-    ObservableList<ConfessionSearchModel> AdminList = FXCollections.observableArrayList();
-    public ObservableList<ConfessionSearchModel> LIST(){
-//        AdminList.add(new ConfessionSearchModel(ID,content,replyID,date));
+
         table.setItems(AdminList);
     return AdminList;
     }
@@ -89,6 +105,7 @@ public class AdminPanelController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+
     }
 
     public void stopMusic(){
@@ -103,24 +120,8 @@ public class AdminPanelController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        try{
-            Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content,reply_id,creation_date FROM storeConfession_table ");
-            ResultSet resultSet = preparedStatement.executeQuery();
+        LIST();
 
-            while(resultSet.next()){
-               ID = resultSet.getString("confession_id");
-               content = resultSet.getString("file_content");
-               replyID = resultSet.getString("reply_id");
-               date = resultSet.getString("creation_date");
-
-                AdminList.add(new ConfessionSearchModel(ID,content,replyID,date));
-
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         confessionCol.setCellValueFactory(new PropertyValueFactory<ConfessionSearchModel, String>("file_content"));
         idCol.setCellValueFactory(new PropertyValueFactory<ConfessionSearchModel, String>("confession_id"));
         dateCol.setCellValueFactory(new PropertyValueFactory<ConfessionSearchModel, String >("creation_date"));
@@ -129,73 +130,88 @@ public class AdminPanelController implements Initializable {
         table.setItems(AdminList);
     }
 
-//    public String delete(ActionEvent event){
-//        int selectedID = table.getSelectionModel().getSelectedIndex();
-//        ConfessionSearchModel cs = new ConfessionSearchModel("","","","");
-//
-//        cs = table.getItems().remove(selectedID);
-//        table.setItems(table.getItems());
-//
-//    return cs.reply_id;
-//    }
-    public void remov(ActionEvent event){
-        int selectedID = table.getSelectionModel().getSelectedIndex();
-        ConfessionSearchModel cs = new ConfessionSearchModel("","","","");
 
-        cs = table.getItems().remove(selectedID);
+    public void View(ActionEvent event){
+        if(event.getSource()==View){
+            table.getItems().clear();
+            LIST();
+            table.setItems(AdminList);
+        }
+    }
+    public void delete(ActionEvent event){
+        String text = textField.getText();
+        loop(text);
+    }
 
-        ConfessionSearchModel se = new ConfessionSearchModel("","",replyID.substring(0,3),"");
+    public boolean checkDependantPost(String postId){
 
-        String reply = cs.reply_id;
+        boolean hasNextPost;
+        String dependantPostId;
+
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content,reply_id,creation_date FROM storeConfession_table ");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            Connection ConnectDB = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
+            // post Id here is reply posts Id
+            String SQL = "SELECT * FROM storeConfession_table WHERE reply_id LIKE'%"+postId+"%'";
+            Statement stmt_2 = ConnectDB.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs_2 = stmt_2.executeQuery(SQL);
 
-            while(resultSet.next()) {
-                String rplyID = resultSet.getString("reply_id");
-                String confessID = resultSet.getString("confession_id");
-                String file = resultSet.getString("file_content");
-                String dat = resultSet.getString("creation_date");
-                ConfessionSearchModel dl = new ConfessionSearchModel(file,confessID,rplyID,dat);
-                if (reply.equals("")) {
-                    System.out.println("doesnt have reply_id");
-                } else if(reply.equals(confessID)) {
-                        //CONTINUE FROM HEREEEE!!!!!!
-                        dl = new ConfessionSearchModel(file,confessID,rplyID,dat);
-
-                    System.out.println(reply);
-                    System.out.println("rplyID "+rplyID);
-                    System.out.println("have reply-id");
-
-                    System.out.println(dl.reply_id);
-                    System.out.println(dl.file_content);
-                    System.out.println(table.getItems().remove(dl));
-                    System.out.println(rplyID);
-                    table.getItems().remove(dl);
-                    table.setItems(table.getItems());
-                }
-                else if(!(reply.equals(confessID))){
-
-                    continue;
+            hasNextPost = rs_2.next();
+            if(!hasNextPost){
+                deletePost(postId);
+                return false;
+            } else {
+                while(hasNextPost){
+                    dependantPostId = rs_2.getString("confession_id");
+                    if (checkDependantPost(dependantPostId))    // if posts is not a leaf
+                        deletePost(dependantPostId);
+                    hasNextPost = rs_2.next();
                 }
             }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPanelController.class.getName());
         }
-
-
-
+        return true;
     }
 
-    public boolean check(String reply){
-        if(replyID.equals(reply)){
-            return true;
+    public void deletePost(String postId){
+        try{
+            Connection ConnectDB = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
+
+            Statement stmt_3 = ConnectDB.createStatement();
+            String SQL_DELETE = "DELETE FROM storeConfession_table WHERE confession_id LIKE'%"+postId+"%'";
+            stmt_3.executeUpdate(SQL_DELETE);
+            System.out.println("Post "+ postId +" deleted successfully");
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
         }
-        else return false;
     }
 
 
+    public void loop(String postId){
+        try{
+            Connection ConnectDB = DriverManager.getConnection("jdbc:mysql://database-student-confession-aws.canrsxzrd6mg.us-west-1.rds.amazonaws.com:3306/UMCP_Database2", "root", "ds2022letsgo");
+
+            String SQL_REPLYPOST = "SELECT * FROM storeConfession_table WHERE reply_id LIKE'%"+postId+"%'";
+
+            Statement stmt = ConnectDB.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery(SQL_REPLYPOST);
+            boolean hasNextPost = rs.next();
+            String replyPostId;
+
+            if(hasNextPost){  // reply posts exists
+                while(hasNextPost){
+                    replyPostId = rs.getString("confession_id");
+                    checkDependantPost(replyPostId);   // check if reply posts has dependant post
+                    deletePost(replyPostId);           // delete current reply post
+                    hasNextPost = rs.next();
+                }
+            }
+            deletePost(postId);     // delete main post
+
+            stmt.close();
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
 

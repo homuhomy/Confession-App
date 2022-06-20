@@ -121,32 +121,35 @@ public class ViewPageController implements Initializable {
             Date curr = new Date();
             if (confess.getSize() <= 5) {
                 //change the numbers to minutes
-                while (!(curr.getTime()-date.getTime()>=15*60*1000)) {
-                    curr = new Date();
-                }
+                if ((curr.getTime()-date.getTime()>=15*60*1000)) {
+//                    curr = new Date();
+
                 confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), (java.sql.Date) DATE.dequeue()));
                 System.out.println(1);
                 table.setItems(confession);
+                }
             }
 
             else if (confess.getSize() <= 10) {
                 //change the numbers to minutes
-                while (!(curr.getTime()-date.getTime()>=10*60*1000)) {
-                    curr = new Date();
-                }
+                if ((curr.getTime()-date.getTime()>=10*60*1000)) {
+//                    curr = new Date();
+
                 confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), (java.sql.Date) DATE.dequeue()));
                 System.out.println(2);
                 table.setItems(confession);
+                }
             }
 
             else {
                 //change the numbers to minutes
-                while (!(curr.getTime()-date.getTime()>=5*60*1000)) {
+                if ((curr.getTime()-date.getTime()>=5*60*1000)) {
                     curr = new Date();
-                }
+
                 confession.add(new ViewTable(ID.dequeue(), confess.dequeue(), (java.sql.Date) DATE.dequeue()));
                 System.out.println(3);
                 table.setItems(confession);
+                }
             }
         }
         }
