@@ -12,4 +12,4 @@ Database name: UMCP_Database2
 
 username: root
 
-password: ds2022letsg
+password: ds2022letsgo
