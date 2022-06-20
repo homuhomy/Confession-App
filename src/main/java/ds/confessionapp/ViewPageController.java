@@ -201,6 +201,7 @@ public class ViewPageController implements Initializable {
         });
         confessionList();
 
+        //for searching purpose
         //initial filtered list
         FilteredList<ViewTable> filteredData = new FilteredList<>(confession, b -> true);
         searchTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -212,9 +213,9 @@ public class ViewPageController implements Initializable {
                 if (confessionSearchModel.getConfession_id().toLowerCase().indexOf(searchKeyword) > -1) {
                     return true; //found a match for confession_id
                 } else if (confessionSearchModel.getFile_content().toLowerCase().indexOf(searchKeyword) > -1) {
-                    return true; //found a match for confession_id
-//                } else if (confessionSearchModel.getCreation_date().toLowerCase().indexOf(searchKeyword) > -1) {
-//                    return true; //found a match for date
+                    return true; //found a match for file content
+                } else if (confessionSearchModel.getCreation_date().toString().indexOf(searchKeyword) > -1) {
+                    return true; //found a match for date
                 } else
                     return false; //no match found
             });

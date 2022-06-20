@@ -14,6 +14,11 @@ public class ViewTable {
         this.file_content = file_content;
         this.creation_date = creation_date;
     }
+
+    public String getDate() {
+        return creation_date + "";
+    }
+
     public String getConfession_id() {
         return confession_id;
     }
