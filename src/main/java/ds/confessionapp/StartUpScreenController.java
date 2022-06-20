@@ -43,18 +43,16 @@ import static ds.confessionapp.newMusic.clip;
 
 public class StartUpScreenController implements Initializable {
 
-    //Confession c = new Confession();
-    SpamCheck s = new SpamCheck();
     @FXML
     public Button ok, submitButton, viewButton, backForsubmitpage, backforviewpage, login, admin, backForadmin, backforAdminPanel, viewconfessionsbutton, submit, search, mediaPlayer;
     @FXML
-    public Button homeButtonIcon, searchButtonIcon, submitButtonIcon;
+    public Button homeButtonIcon, submitButtonIcon;
     @FXML
-    public TextField input, pswdinput, confessID, searchField;
+    public TextField input, pswdinput, confessID;
     @FXML
     public TextArea confession, displayTime;
     @FXML
-    public Label XsuccessLabel, confessions, SubmissionTime, warningSubmit, time;
+    public Label XsuccessLabel, confessions, warningSubmit, time, loadingLabel;
 
     @FXML
     Label st = new Label("submitTime");
@@ -67,18 +65,14 @@ public class StartUpScreenController implements Initializable {
             Connection connection = DriverManager.getConnection("jdbc:mysql://34.124.213.155:3306/UMConfession_database", "root", "ds2022letsgo");
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT confession_id,file_content FROM storeConfession_table ");
             ResultSet resultSet = preparedStatement.executeQuery();
-
-
             while (resultSet.next()) {
                 ID.enqueue(resultSet.getString("confession_id"));
                 confess.enqueue(resultSet.getString("file_content"));
-
             }
 //            System.out.println(confess.toString());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
     public static void WaitingList() {
         try {
@@ -99,11 +93,9 @@ public class StartUpScreenController implements Initializable {
 
                 if(resultSet.getInt("count(file_content)")<=5){
                     timer.scheduleAtFixedRate(task,10, 10);
-
                 }
                 else if(resultSet.getInt("count(file_content)")<=10){
                     timer.scheduleAtFixedRate(task,20, 20);
-
                 }
                 else {
                     timer.schedule(task,0,15);
@@ -114,13 +106,10 @@ public class StartUpScreenController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-    DatabaseSaveData d = new DatabaseSaveData();
     public static void main(String[] args) {
     }
 
     public void switchScenes(ActionEvent event) throws Exception {
-
         Stage stage = null;
         Parent root = null;
         if(event.getSource()== submitButton){
@@ -140,10 +129,6 @@ public class StartUpScreenController implements Initializable {
             //stage = (Stage) submitButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
         }
-//        else if(event.getSource()==search){
-//            stage = (Stage) search.getScene().getWindow();
-//            root = FXMLLoader.load(getClass().getResource("searchPage.fxml"));
-//        }
         else if(event.getSource()==viewButton){
             stage = (Stage) viewButton.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("ViewConfessionPage.fxml"));
@@ -195,8 +180,10 @@ public class StartUpScreenController implements Initializable {
             confessions.setVisible(true);
             confessions.setText(confess.toString()); //when button is clicked, the confessions can be viewed
         }
-        //KIV!!!! NEED TO CHANGE THE ENQUEUING PART
         else if(event.getSource()==submit){
+            String submitting = "Adding submission...";
+            this.loadingLabel.setText(submitting);
+
             //submit new pst to tempFiles folder
             String data=confession.getText().trim(); //read contents of text area into 'data'
             String replyId = confessID.getText();
@@ -217,6 +204,7 @@ public class StartUpScreenController implements Initializable {
             }
             String newPostName = "tempFiles/newPost" + number + ".txt";
             BufferedWriter toNewTxtFile = new BufferedWriter(new FileWriter(newPostName));
+
             try {
                 toNewTxtFile.write(content);
             }
@@ -233,6 +221,11 @@ public class StartUpScreenController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    public void loadingStatus(){
+        loadingLabel.setVisible(true);
+        loadingLabel.setText("Adding submission...");
+    }
     public void Success(){
         XsuccessLabel.setVisible(true);
         XsuccessLabel.setText("Login Successful!\nPress 'OK' to continue ");
@@ -244,7 +237,6 @@ public class StartUpScreenController implements Initializable {
         XsuccessLabel.setText("Login Unsuccessful!\nPlease try again");
         ok.setVisible(false);
     }
-
     @FXML
     public void loginAction(ActionEvent event){
         int ans = verify(input.getText(),pswdinput.getText());

@@ -39,6 +39,7 @@
             <Label fx:id="warningSubmit" layoutX="285.0" layoutY="115.0" prefHeight="17.0" prefWidth="268.0" textFill="#ff2626" />
             <Button layoutX="-8.0" layoutY="445.0" mnemonicParsing="false" onAction="#stopMusic" styleClass="mute-button-icon" stylesheets="@Stylesheet.css" text="MUTE" />
             <Button layoutX="37.0" layoutY="445.0" mnemonicParsing="false" onAction="#continueMusic" styleClass="unmute-button-icon" stylesheets="@Stylesheet.css" text="UNMUTE" />
+            <Label fx:id="loadingLabel" layoutX="369.0" layoutY="392.0" prefHeight="17.0" prefWidth="124.0" text="Adding submission..." textFill="#2125ff" />
          </children>
       </AnchorPane>
    </center>

@@ -3,6 +3,7 @@ module ds.confessionapp {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires jdk.compiler;
 
 
     opens ds.confessionapp to javafx.fxml;
